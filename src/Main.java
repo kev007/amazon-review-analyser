@@ -11,12 +11,15 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.io.IOException;
 
+import crawler.*;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException, ParseException,
-    ClassNotFoundException, SQLException, InvalidKeyException,
-    NoSuchAlgorithmException, InterruptedException {
+            ClassNotFoundException, SQLException, InvalidKeyException,
+            NoSuchAlgorithmException, InterruptedException {
+
         Parent root = FXMLLoader.load(getClass().getResource("MainWindowView.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
@@ -27,12 +30,11 @@ public class Main extends Application {
     public static void main(String[] args) throws IOException, ParseException,
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
-
-        //launch(args);
-
         //example: write all reviews for an item (defined by its ASIN) to a SQLite database
-        Item an_item = new Item("B00EB7UIZU");
+        Item an_item = new Item("B00OLT7QSU");
         an_item.fetchReview();
         an_item.writeReviewsToDatabase("test.db", false);
+
+        launch(args);
     }
 }

@@ -1,3 +1,5 @@
+package crawler;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -20,9 +22,9 @@ public class DEPRECATEDcrawler {
 			NoSuchAlgorithmException, InterruptedException {
 
 		//example: write all reviews for an item (defined by its ASIN) to a SQLite database
-		Item an_item = new Item("B00EB7UIZU");
-		an_item.fetchReview();
-		an_item.writeReviewsToDatabase("test.db", false);
+		//crawler.Item an_item = new crawler.Item("B00EB7UIZU");
+		//an_item.fetchReview();
+		//an_item.writeReviewsToDatabase("test.db", false);
 
 	}
 
