@@ -13,12 +13,6 @@ import java.util.ResourceBundle;
 
 public class Controller {
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private TextField fieldASIN;
 
     @FXML
@@ -30,10 +24,10 @@ public class Controller {
             NoSuchAlgorithmException, InterruptedException {
 
         String ASIN = fieldASIN.getText();     //Test value: "B00NMJJXU4"
+
         if (ASIN.length() == 10) {
             System.out.print("Starting Crawler ...\n");
             Main.CM.crawl(ASIN);
-            //an_item.writeReviewsToDatabase("test.db", false);
         } else {
             System.out.print("CHECK ASIR\n");
         }

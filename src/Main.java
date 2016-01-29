@@ -32,5 +32,7 @@ public class Main extends Application {
         CM = new CrawlerManager();
 
         launch(args);
+
+        //Main.CM.crawl("B00NMJJXU4");
     }
 }

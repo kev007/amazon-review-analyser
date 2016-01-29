@@ -33,6 +33,8 @@ public class DBManager extends Thread {
     public DBManager(String dbName) {
         this.setDaemon(true);
         this.dbName = dbName;
+
+        System.out.println("Starting DBManager: " + this.dbName);
     }
 
     /**
@@ -78,9 +80,11 @@ public class DBManager extends Thread {
         while (true) {
             try {
                 if (writeQueue.size() == 0){
+                    System.out.println("sleep");
                     this.sleep(400);
                 }
                 else {
+                    System.out.println("Writing to DB: " + this.dbName);
                     writeDB();
                 }
 
