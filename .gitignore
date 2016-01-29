@@ -4,4 +4,4 @@ bin/
 *.project
 *.iml
 out/
-/test.db
+*.db
