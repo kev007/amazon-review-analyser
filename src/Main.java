@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.io.IOException;
 
-import crawler.*;
 
 public class Main extends Application {
 
@@ -26,15 +25,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
-    public static void main(String[] args) throws IOException, ParseException,
-            ClassNotFoundException, SQLException, InvalidKeyException,
-            NoSuchAlgorithmException, InterruptedException {
-        //example: write all reviews for an item (defined by its ASIN) to a SQLite database
-        Item an_item = new Item("B00OLT7QSU");
-        an_item.fetchReview();
-        an_item.writeReviewsToDatabase("test.db", false);
-
+    public static void main(String[] args) {
         launch(args);
     }
 }
