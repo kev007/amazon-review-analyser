@@ -28,7 +28,7 @@ public class CrawlerManager {
             System.out.println("Running " +  this.ASIN );
             this.item.fetchReview();
             Main.DBM.addItem(this.item);
-            System.out.println("Thread " +  this.ASIN + " exiting.");
+            System.out.println("Crawler for " +  this.ASIN + " done!");
         }
     }
 }

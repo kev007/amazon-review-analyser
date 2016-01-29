@@ -29,6 +29,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         DBM = new DBManager("test.db");
+        DBM.start();
         CM = new CrawlerManager();
 
         launch(args);

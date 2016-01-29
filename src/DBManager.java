@@ -33,6 +33,7 @@ public class DBManager extends Thread {
     public DBManager(String dbName) {
         this.setDaemon(true);
         this.dbName = dbName;
+        this.writeQueue = new LinkedList<Item>();
 
         System.out.println("Starting DBManager: " + this.dbName);
     }
@@ -50,10 +51,7 @@ public class DBManager extends Thread {
      * Add Amazon ASIN to crawler
      */
     public void addItem(Item asinItem) {
-        if (this.writeQueue == null) {
-            this.writeQueue = new LinkedList<Item>();
-            this.writeQueue.add(asinItem);
-        }
+        this.writeQueue.add(asinItem);
     }
 
     /**
@@ -80,7 +78,6 @@ public class DBManager extends Thread {
         while (true) {
             try {
                 if (writeQueue.size() == 0){
-                    System.out.println("sleep");
                     this.sleep(400);
                 }
                 else {
