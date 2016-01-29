@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.io.IOException;
 
-public class crawler {
+public class DEPRECATEDcrawler {
 
 	/**
 	 * @param args
