@@ -29,6 +29,7 @@
          <children>
             <TextField fx:id="asir" prefHeight="39.0" prefWidth="391.0" text="B00NMJJXU4" />
             <Button fx:id="crawlButton" mnemonicParsing="false" onAction="#startCrawl" text="Crawl" />
+            <Button fx:id="getButton1" mnemonicParsing="false" onAction="#get" text="Get" />
          </children>
       </FlowPane>
    </children>

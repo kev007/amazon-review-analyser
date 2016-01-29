@@ -1,4 +1,7 @@
 *.settings
 bin/
 *.metadata
+*.project
+*.iml
 out/
+/test.db

@@ -13,6 +13,8 @@ import java.io.IOException;
 
 
 public class Main extends Application {
+    public static DBManager DBM;
+    public static CrawlerManager CM;
 
     @Override
     public void start(Stage primaryStage) throws IOException, ParseException,
@@ -26,6 +28,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        DBM = new DBManager("test.db");
+        CM = new CrawlerManager();
+
         launch(args);
     }
 }
