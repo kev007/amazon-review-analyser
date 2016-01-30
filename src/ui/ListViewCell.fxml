@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<!--<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">-->
-   <!--<right>-->
-      <!--<Button fx:id="delButton" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />-->
-   <!--</right>-->
-   <!--<center>-->
-      <!--<Label fx:id="tempLabel" text="Label" BorderPane.alignment="CENTER" />-->
-   <!--</center>-->
-   <!--<left>-->
-      <!--<ImageView fitHeight="39.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />-->
-   <!--</left>-->
-<!--</BorderPane>-->
-<HBox xmlns:fx="http://javafx.com/fxml" fx:id="hBox">
-   <children>
-      <Label  fx:id="label1"/>
-      <Label  fx:id="label2"/>
-   </children>
-</HBox>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <right>
+      <Button fx:id="delButton" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <Label fx:id="tempLabel" prefHeight="17.0" prefWidth="425.0" text="Label" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <ImageView fitHeight="39.0" fitWidth="126.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

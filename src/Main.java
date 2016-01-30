@@ -15,15 +15,20 @@ import java.io.IOException;
 public class Main extends Application {
     public static DBManager DBM;
     public static ItemManager IM;
+    public static Scene scene;
+    public static Parent root;
 
     @Override
     public void start(Stage primaryStage) throws IOException, ParseException,
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("MainWindowView.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 1200, 600));
+        root = FXMLLoader.load(getClass().getResource("MainWindowView.fxml"));
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setWidth(1200);
+        primaryStage.setHeight(600);
+        primaryStage.setTitle("Amazon Review Analyser");
         primaryStage.show();
     }
 
