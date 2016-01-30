@@ -1,4 +1,6 @@
 import crawler.Item;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -86,7 +88,20 @@ public class ItemManager {
         return item;
     }
 
-    
+    public ObservableList getAll() {
+        ObservableList data = FXCollections.observableArrayList();
+
+        Set set = localItems.entrySet();
+        Iterator iterator = set.iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+//            data.add(mentry.getValue());
+            data.add(mentry.getKey().toString());
+        }
+
+        return data;
+    }
+
 
     /**
      * runnable crawler: crawl amazon.com for customer reviews for given ASIN

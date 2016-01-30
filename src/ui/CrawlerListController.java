@@ -1,10 +1,8 @@
 package ui;
 
-import crawler.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
-import javafx.scene.control.cell.TextFieldListCell;
 
 /**
  * Created by Fechler on 30.01.16.
@@ -12,17 +10,21 @@ import javafx.scene.control.cell.TextFieldListCell;
 public class CrawlerListController {
 
     private ObservableList<String>  items;
-    private ListView<String>        list;
+    static ListView<String> list;
+    static ListView list2;
 
     public CrawlerListController(){
         items = FXCollections.observableArrayList("test1", "test2");
         list = new ListView<>(items);
-        list.setCellFactory(TextFieldListCell.forListView());
-        list.setEditable(false);
+        list2 = new ListView<>(items);
     }
 
-    public void addItem(String temp){
-        list.getItems().add(temp);
+    public static void addItem(String ASIN){
+        list.getItems().add(ASIN);
+    }
+
+    public static void addAll(ObservableList data){
+        list2.setItems(data);
     }
 
 }
