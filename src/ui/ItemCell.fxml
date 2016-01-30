@@ -5,12 +5,12 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="tempLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="ItemCell">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <right>
       <Button fx:id="delButton" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <Label text="Label" BorderPane.alignment="CENTER" />
+      <Label fx:id="tempLabel" text="Label" BorderPane.alignment="CENTER" />
    </center>
    <left>
       <ImageView fitHeight="39.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />

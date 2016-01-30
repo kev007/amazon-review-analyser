@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.util.Callback;
 import ui.ItemCell;
+import ui.ListViewCell;
 
 import java.io.IOException;
 import java.net.URL;
@@ -76,6 +77,7 @@ public class Controller implements Initializable {
 
         listview.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             public ListCell<String> call(ListView<String> param) {
+//                return new ListViewCell();
                 return new ItemCell();
             }
         });
