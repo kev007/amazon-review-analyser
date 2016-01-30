@@ -28,8 +28,7 @@
       <FlowPane layoutX="25.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <children>
             <TextField fx:id="fieldASIN" prefHeight="39.0" prefWidth="391.0" text="B00NMJJXU4" />
-            <Button fx:id="crawlButton" mnemonicParsing="false" onAction="#startCrawl" text="Crawl" />
-            <Button fx:id="getButton1" mnemonicParsing="false" onAction="#get" text="Get" />
+            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" text="Get Item" />
          </children>
       </FlowPane>
    </children>
