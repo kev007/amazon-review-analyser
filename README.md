@@ -1,9 +1,11 @@
 [amazon-review-analyser](https://github.com/kev007/amazon-review-analyser)
 =======================
 
-##TODO
+## TODO
 
 * Schedule
+    * Sonntag selbstarbeit
+    * montag treffen
 * Code
 * Presentation
 * Licence
@@ -12,28 +14,37 @@
 ### Code
 1. Front End: GUI
     1. 3 Pane Layout  - See [Resources/GUI_Design1.jpg](https://github.com/kev007/amazon-review-analyser/blob/master/Resources/GUI_Design1.jpg?raw=true)
-        1. 
-        2. 
-        3. 
+        1. ListView (alles)
+        2. Darstellung Produktdetails
+        3. Darstellung bewertung
+            1. analyse positiv/negativ
+            2. analyse other interesting data
     2. Events Listener
 2. Back End
     1. Crawler
         1. Event Trigger (Progress)
-    2. 
+        2. any Amazon.com URL
+    2. Incorrect ASIN GET filtering (remove bad crawled data)
 3. Other
     1. Code Comments
     2. Code Documentation
-    3. Refactor Crawler
+    3. UML Diagramm
+    4. Refactor Crawler
 
 ### Presentation
-1. 
-    1. 
-2. 
+1. Resources/GUI_Design1.jpg
+    1. Basis idee für JavaFX GUI
+2. Crawler resultate
+    1. SQLite Database
+    2. Database struktur
+3. Programmstruktur
+    1. Objekts (crawler/Item sehr wichtig)
+4.
  
 ---
 ---
 ---
-##README
+## README
 
 A Java crawler to collect and analyse product reviews on Amazon.com.
 
