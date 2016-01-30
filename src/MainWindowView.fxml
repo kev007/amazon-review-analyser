@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <MenuBar prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar prefHeight="27.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -31,31 +31,39 @@
             </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.5, 0.5" maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+      <SplitPane dividerPositions="0.4, 0.7" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
          <items>
-            <BorderPane maxWidth="400.0" prefHeight="200.0" prefWidth="200.0">
-               <top>
-                  <FlowPane BorderPane.alignment="CENTER">
-                     <children>
-                        <TextField fx:id="fieldASIN" prefHeight="39.0" prefWidth="300.0" text="B00NMJJXU4" />
-                        <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" text="Get Item" />
-                     </children>
-                     <BorderPane.margin>
-                        <Insets bottom="5.0" top="5.0" />
-                     </BorderPane.margin>
-                  </FlowPane>
-               </top>
+            <BorderPane minWidth="350.0">
                <center>
-                  <HBox fx:id="hbox" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                  <HBox fx:id="hbox" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" />
+                     </BorderPane.margin></HBox>
                    <!--<ListView fx:id="crawlerList" maxHeight="425.0" maxWidth="400.0" prefHeight="248.0" prefWidth="400.0" BorderPane.alignment="TOP_CENTER">-->
                        <!--<BorderPane.margin>-->
                            <!--<Insets />-->
                        <!--</BorderPane.margin>-->
                    <!--</ListView>-->
                </center>
+               <top>
+                  <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                     <right>
+                        <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" text="Get Item" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </BorderPane.margin></Button>
+                     </right>
+                     <center>
+                        <TextField fx:id="fieldASIN" minWidth="250.0" prefHeight="39.0" prefWidth="275.0" text="B00NMJJXU4" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="5.0" />
+                           </BorderPane.margin></TextField>
+                     </center>
+                  </BorderPane>
+               </top>
             </BorderPane>
-            <BorderPane maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" />
-            <BorderPane maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane minWidth="250.0" />
+            <BorderPane minWidth="250.0" />
          </items>
       </SplitPane>
    </children>
