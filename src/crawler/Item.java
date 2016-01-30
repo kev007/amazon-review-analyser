@@ -107,6 +107,7 @@ public class Item {
 	 */
 	public Review cleanReviewBlock(Element reviewBlock) throws ParseException {
 		String theitemID = this.itemID;
+		String itemname = this.itemName;
 		String reviewID = "";
 		String customerName = "";
 		String customerID = "";
@@ -203,10 +204,10 @@ public class Item {
 			NoSuchAlgorithmException, ClientProtocolException, SQLException,
 			IOException {
 		if (API == true) {
-			DatabaseUpdater.doUpdate(database, reviews, itemID,
+			DatabaseUpdater.doUpdate(database, reviews, itemID, itemName,
 					getXMLLargeResponse());
 		} else {
-			DatabaseUpdater.doUpdate(database, reviews, itemID, "");
+			DatabaseUpdater.doUpdate(database, reviews, itemID, itemName, "");
 		}
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();

@@ -30,7 +30,7 @@ public class Controller {
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
 
-        //ObservableList<String> items = FXCollections.observableArrayList ();
+        ObservableList data = FXCollections.observableArrayList();
 
         /**
          * Read user input from GUI
@@ -43,11 +43,11 @@ public class Controller {
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);
+            data.addAll(Main.IM.localItems);
         } else {
             System.out.print("CHECK ASIR\n");
         }
-        crawlerList.setItems(items);
-
+        crawlerList.setItems(data);
     }
 
     @FXML

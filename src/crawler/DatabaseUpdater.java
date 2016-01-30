@@ -39,7 +39,7 @@ public class DatabaseUpdater {
 	 * @throws IOException
 	 */
 	public static void doUpdate(String database, ArrayList<Review> reviews,
-			String itemID, String itemInfo) throws SQLException,
+			String itemID, String itemName, String itemInfo) throws SQLException,
 			ClassNotFoundException, IOException {
 		lock.lock();
 		try {
@@ -54,7 +54,7 @@ public class DatabaseUpdater {
 					stmt = conn.createStatement();
 					String sql = "CREATE TABLE reviewinfo ( [KEY] INTEGER PRIMARY KEY, addedDate TEXT, reviewDate TEXT, realName TEXT, verifiedPurchase TEXT, totalVotes NUMERIC, helpfulVotes NUMERIC, fullRating NUMERIC, rating NUMERIC, title TEXT, customerID TEXT, customerName TEXT, reviewID TEXT UNIQUE ON CONFLICT REPLACE, itemID TEXT );";
 					stmt.executeUpdate(sql);
-					sql = "CREATE TABLE iteminfo ( id INTEGER PRIMARY KEY AUTOINCREMENT, itemID TEXT UNIQUE ON CONFLICT IGNORE, itemXMLInfo TEXT );";
+					sql = "CREATE TABLE iteminfo ( id INTEGER PRIMARY KEY AUTOINCREMENT, itemID TEXT UNIQUE ON CONFLICT IGNORE, itemName TEXT, itemXMLInfo TEXT );";
 					stmt.executeUpdate(sql);
 					sql = "CREATE TABLE review ( [KEY] INTEGER PRIMARY KEY, reviewid TEXT UNIQUE ON CONFLICT REPLACE, title TEXT, content TEXT );";
 					stmt.executeUpdate(sql);
@@ -114,9 +114,10 @@ public class DatabaseUpdater {
 			// Response
 			// in raw XML format
 			PreparedStatement insertitemXML = conn
-					.prepareStatement("insert into iteminfo(itemid, itemXMLInfo) values (?, ?);");
+					.prepareStatement("insert into iteminfo(itemID, itemName, itemXMLInfo) values (?1, ?2 ,?3);");
 			insertitemXML.setString(1, itemID);
-			insertitemXML.setString(2, itemInfo);
+			insertitemXML.setString(2, itemName);
+			insertitemXML.setString(3, itemInfo);
 			insertitemXML.addBatch();
 			insertitemXML.executeBatch();
 			conn.commit();
