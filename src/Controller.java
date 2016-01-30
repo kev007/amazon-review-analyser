@@ -58,14 +58,6 @@ public class Controller {
     @FXML
     void initialize() {
 
-        //this.crawlerList.setCellFactory(new Callback<ListView<Item>>, CrawlerListCell<Item>());
-        this.crawlerList.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
-            @Override
-            public ListCell<Item> call(ListView<Item> param) {
-                return null;
-            }
-        });
-
         assert fieldASIN != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainWindowView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainWindowView.fxml'.";
     }
