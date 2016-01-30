@@ -103,11 +103,13 @@ public class ItemManager {
         }
 
         public void run() {
-            System.out.println(thread + ". Running " +  this.ASIN );
-            this.item.fetchReview();
-            System.out.println(thread + ". Crawler for " +  this.ASIN + " done!");
+            System.out.println(thread + ". Running " + (char)27 + "[31m" + this.ASIN + (char)27 + "[0m");
 
-            Main.DBM.addItem(this.item);
+            this.item.fetchReview();
+
+            System.out.println(thread + ". Crawler complete for: " + (char)27 + "[32m" + this.item.itemName + (char)27 + "[0m");
+
+            Main.DBM.addItem(item);
         }
     }
 }

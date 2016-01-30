@@ -32,8 +32,12 @@ public class Main extends Application {
         DBM.start();
         IM = new ItemManager();
 
-        launch(args);
+        //launch(args);
 
-        //Main.CM.crawl("B00A378L4C");
+        //Main.IM.get("B00A378L4C");
+        Main.IM.get("B00NMJJXU4");
+        while(true){
+
+        }
     }
 }

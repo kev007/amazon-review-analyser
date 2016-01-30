@@ -67,7 +67,8 @@ public class Item {
 				maxpage = Collections.max(pagenum);
 			}
 			//get product name
-			itemName = "name correctly set";
+			itemName = reviewpage1.select("div.a-row.product-title").select("a.a-size-large.a-link-normal").text();
+//			System.out.println("Name: " + itemName);
 
 			// collect review from each of the review pages;
 			for (int p = 1; p <= maxpage; p = p + 1) {
@@ -78,7 +79,7 @@ public class Item {
 				org.jsoup.nodes.Document reviewpage = null;
                 reviewpage = Jsoup.connect(url).timeout(10*1000).get();
 				if (reviewpage.select("div.a-section.review").isEmpty()) {
-					System.out.println(itemID + " " + "no reivew");
+					System.out.println(itemID + " " + "no review");
 				} else {
 					Elements reviewsHTMLs = reviewpage.select(
 							"div.a-section.review");
