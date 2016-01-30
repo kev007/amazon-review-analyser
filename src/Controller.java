@@ -1,11 +1,10 @@
+import crawler.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -24,14 +23,14 @@ public class Controller {
     private MenuItem menuPrintLocal;
 
     @FXML
-    private ListView<String> crawlerList;
+    private ListView<Item> crawlerList;
 
     @FXML
     public void getItem(ActionEvent event) throws IOException, ParseException,
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
 
-        ObservableList<String> items = FXCollections.observableArrayList ();
+        //ObservableList<String> items = FXCollections.observableArrayList ();
 
         /**
          * Read user input from GUI
@@ -48,6 +47,7 @@ public class Controller {
             System.out.print("CHECK ASIR\n");
         }
         crawlerList.setItems(items);
+
     }
 
     @FXML
@@ -57,6 +57,15 @@ public class Controller {
 
     @FXML
     void initialize() {
+
+        //this.crawlerList.setCellFactory(new Callback<ListView<Item>>, CrawlerListCell<Item>());
+        this.crawlerList.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
+            @Override
+            public ListCell<Item> call(ListView<Item> param) {
+                return null;
+            }
+        });
+
         assert fieldASIN != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainWindowView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainWindowView.fxml'.";
     }
