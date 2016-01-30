@@ -1,6 +1,9 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
@@ -21,6 +24,9 @@ public class Controller {
     private MenuItem menuPrintLocal;
 
     @FXML
+    private ListView<String> crawlerList;
+
+    @FXML
     public void getItem(ActionEvent event) throws IOException, ParseException,
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
@@ -39,6 +45,12 @@ public class Controller {
         } else {
             System.out.print("CHECK ASIR\n");
         }
+
+
+        // test
+        ObservableList<String> items = FXCollections.observableArrayList (
+                "A", "B", "C", "D");
+        crawlerList.setItems(items);
     }
 
     @FXML
