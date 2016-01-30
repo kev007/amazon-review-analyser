@@ -12,6 +12,10 @@ import javafx.scene.layout.HBox;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 /**
  * Created by kev_s on 30.01.2016.
@@ -40,11 +44,11 @@ public class CellController {
             throw new RuntimeException(e);
         }
 
-        delButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println(tempLabel.getText() + " : delete"); // + event
-            }
-        });
+//        delButton.setOnAction(new EventHandler<ActionEvent>() {
+//            public void handle(ActionEvent event) {
+//                System.out.println(tempLabel.getText() + " : delete"); // + event
+//            }
+//        });
     }
 
     public void setInfo(String string) {
@@ -53,5 +57,10 @@ public class CellController {
 
     public BorderPane getPane() {
         return borderPane;
+    }
+
+    @FXML
+    public void delItem(ActionEvent event)  {
+        System.out.println(tempLabel.getText() + " : delete"); // + event
     }
 }

@@ -15,6 +15,7 @@ public class ListViewCell extends ListCell<String> {
             CellController CC = new CellController();
             CC.setInfo(string);
             setGraphic(CC.getPane());
+//            setGraphic(CC.getPane());
         }
     }
 }

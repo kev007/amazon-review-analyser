@@ -77,12 +77,10 @@ public class Controller implements Initializable {
         assert fieldASIN != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainWindowView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainWindowView.fxml'.";
 
-//        listView.setItems(Main.IM.getAllStrings());
-
         listView.setCellFactory(new Callback<ListView<String>, javafx.scene.control.ListCell<String>>() {
             public ListCell<String> call(ListView<String> listView) {
-                return new ListViewCell();
-//                return new ItemCell();
+//                return new ListViewCell();
+                return new ItemCell();
             }
         });
     }

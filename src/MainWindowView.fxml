@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 
 <!--<AnchorPane maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">-->
+
 <AnchorPane maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <MenuBar prefHeight="27.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -45,7 +46,7 @@
                <top>
                   <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
                      <right>
-                        <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" text="Get Item" BorderPane.alignment="CENTER">
+                        <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" prefHeight="30.0" text="Get Item" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets left="5.0" right="5.0" />
                            </BorderPane.margin></Button>
