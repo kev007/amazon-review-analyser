@@ -214,7 +214,7 @@ public class Item {
 		Date date = new Date();
 		String timenow = dateFormat.format(date);
 		System.out.println(this.itemID + " Finished " + timenow);
-		//TODO: event - database writing finsihed
+		//TODO: event - database writing finished
 	}
 
 	/**
