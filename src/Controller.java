@@ -1,6 +1,7 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -17,7 +18,10 @@ public class Controller {
     private Button getButton;
 
     @FXML
-    void getItem(ActionEvent event) throws IOException, ParseException,
+    private MenuItem menuPrintLocal;
+
+    @FXML
+    public void getItem(ActionEvent event) throws IOException, ParseException,
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
 
@@ -35,6 +39,11 @@ public class Controller {
         } else {
             System.out.print("CHECK ASIR\n");
         }
+    }
+
+    @FXML
+    public void debugPrintLocal(ActionEvent event) {
+        Main.IM.printLocal();
     }
 
     @FXML
