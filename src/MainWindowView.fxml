@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -36,7 +37,7 @@
                <top>
                   <FlowPane BorderPane.alignment="CENTER">
                      <children>
-                        <TextField fx:id="fieldASIN" prefHeight="39.0" prefWidth="200.0" text="B00NMJJXU4" />
+                        <TextField fx:id="fieldASIN" prefHeight="39.0" prefWidth="300.0" text="B00NMJJXU4" />
                         <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" text="Get Item" />
                      </children>
                      <BorderPane.margin>
@@ -45,11 +46,12 @@
                   </FlowPane>
                </top>
                <center>
-                  <ListView fx:id="crawlerList" maxHeight="425.0" maxWidth="400.0" prefHeight="425.0" prefWidth="400.0" BorderPane.alignment="TOP_CENTER">
-                     <BorderPane.margin>
-                        <Insets />
-                     </BorderPane.margin>
-                  </ListView>
+                  <HBox fx:id="hbox" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                   <!--<ListView fx:id="crawlerList" maxHeight="425.0" maxWidth="400.0" prefHeight="248.0" prefWidth="400.0" BorderPane.alignment="TOP_CENTER">-->
+                       <!--<BorderPane.margin>-->
+                           <!--<Insets />-->
+                       <!--</BorderPane.margin>-->
+                   <!--</ListView>-->
                </center>
             </BorderPane>
             <BorderPane maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" />

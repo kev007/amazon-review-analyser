@@ -1,17 +1,24 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.util.Callback;
 
 import java.io.IOException;
+import java.net.URL;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
     @FXML
     private TextField fieldASIN;
 
@@ -23,6 +30,9 @@ public class Controller {
 
     @FXML
     public ListView<String> crawlerList;
+
+    @FXML
+    private HBox hbox;
 
     @FXML
     public void getItem(ActionEvent event) throws IOException, ParseException,
@@ -45,6 +55,8 @@ public class Controller {
         } else {
             System.out.print("CHECK INPUT\n");
         }
+
+
     }
 
     /**
@@ -57,8 +69,58 @@ public class Controller {
     }
 
     @FXML
-    void initialize() {
+    public void initialize(URL location, ResourceBundle resources) {
         assert fieldASIN != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainWindowView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainWindowView.fxml'.";
+
+        ObservableList<String> list = FXCollections.observableArrayList(
+                "Item 1", "Item 2", "Item 3", "Item 4");
+        ListView<String> lv = new ListView<>(list);
+        lv.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new XCell();
+            }
+        });
+
+        hbox.getChildren().add(lv);
+        HBox.setHgrow(lv, Priority.ALWAYS);
+
+//        hbox.getChildren().add(crawlerList);
+//        HBox.setHgrow(crawlerList, Priority.ALWAYS);
+    }
+
+    static class XCell extends ListCell<String> {
+        HBox hbox = new HBox();
+        Label label = new Label("(empty)");
+        Pane pane = new Pane();
+        Button button = new Button("(>)");
+        String lastItem;
+
+        public XCell() {
+            super();
+            hbox.getChildren().addAll(label, pane, button);
+            HBox.setHgrow(pane, Priority.ALWAYS);
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    System.out.println(lastItem + " : " + event);
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(null);  // No text in label of super class
+            if (empty) {
+                lastItem = null;
+                setGraphic(null);
+            } else {
+                lastItem = item;
+                label.setText(item!=null ? item : "<null>");
+                setGraphic(hbox);
+            }
+        }
     }
 }
