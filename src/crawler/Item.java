@@ -1,26 +1,5 @@
 package crawler;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.*;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -28,10 +7,24 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.jsoup.Jsoup;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A product and all of its reviews
@@ -43,6 +36,7 @@ import org.jsoup.select.Elements;
 public class Item {
 	public Item(String theitemid) {
 		itemID = theitemid;
+		itemName = "Unknown";
 		reviews = new ArrayList<Review>();
 	}
 
@@ -72,6 +66,9 @@ public class Item {
 				}
 				maxpage = Collections.max(pagenum);
 			}
+			//get product name
+			itemName = "name correctly set";
+
 			// collect review from each of the review pages;
 			for (int p = 1; p <= maxpage; p = p + 1) {
 				url = "http://www.amazon.com/product-reviews/"
@@ -340,5 +337,6 @@ public class Item {
 	}
 
 	public String itemID;
+	public String itemName;
 	public ArrayList<Review> reviews;
 }

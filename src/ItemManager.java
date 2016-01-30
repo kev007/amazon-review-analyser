@@ -16,16 +16,23 @@ public class ItemManager {
      * <key, value> where the key is the ASIN and trhe value is the Item object
      */
     public HashMap<String, Item> localItems;
-    int thread = 0;
+    int thread;
 
+    /**
+     * ItemManager constructor
+     * inits the Hashmap
+     * sets the total of launched threads to 0
+     */
     public ItemManager() {
         System.out.println("Starting ItemManager");
 
-        this.localItems = new HashMap();
+        localItems = new HashMap();
+        thread = 0;
     }
 
     /**
      * return localItems for corresponding ASIN, crawl and return if not locally available
+     * @param ASIN
      */
     public void get(String ASIN) {
         if (localItems.containsKey(ASIN)) {
@@ -36,6 +43,22 @@ public class ItemManager {
         }
     }
 
+    /**
+     * for a given ASIN, removes it from localItems
+     * @param ASIN
+     */
+    public void delete(String ASIN) {
+        if (localItems.containsKey(ASIN)) {
+            localItems.remove(ASIN);
+            System.out.println(ASIN + " found locally and removed!");
+        } else {
+            System.out.println(ASIN + " not found locally");
+        }
+    }
+
+    /**
+     * for debugging purposes, iterates through localItems and prints them to console
+     */
     public void printLocal() {
         int total = 0;
         Set set = localItems.entrySet();
@@ -62,6 +85,8 @@ public class ItemManager {
 
         return item;
     }
+
+    
 
     /**
      * runnable crawler: crawl amazon.com for customer reviews for given ASIN

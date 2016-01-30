@@ -31,6 +31,8 @@ public class Controller {
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
 
+        ObservableList<String> items = FXCollections.observableArrayList ();
+
         /**
          * Read user input from GUI
          */
@@ -45,11 +47,6 @@ public class Controller {
         } else {
             System.out.print("CHECK ASIR\n");
         }
-
-
-        // test
-        ObservableList<String> items = FXCollections.observableArrayList (
-                "A", "B", "C", "D");
         crawlerList.setItems(items);
     }
 
