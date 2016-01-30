@@ -13,31 +13,15 @@ import javafx.scene.layout.Priority;
  * Created by kev_s on 30.01.2016.
  */
 public class ListViewCell extends ListCell<String> {
-    HBox hbox = new HBox();
-    Label label = new Label("(empty)");
-    Pane pane = new Pane();
-    Button button = new Button("delete");
-
-    public ListViewCell() {
-        super();
-
-        hbox.getChildren().addAll(label, pane, button);
-        HBox.setHgrow(pane, Priority.ALWAYS);
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println(label.getText() + " : delete"); // + event
-            }
-        });
-    }
-
-    protected void updateItem(String ASIN, boolean empty) {
-        super.updateItem(ASIN, empty);
-        setText(null);  // No text in label of super class
-        if (empty) {
-            setGraphic(null);
-        } else {
-            label.setText(ASIN);
-            setGraphic(hbox);
+    @Override
+    public void updateItem(String string, boolean empty)
+    {
+        super.updateItem(string, empty);
+        if(string != null)
+        {
+            CellController CC = new CellController();
+            CC.setInfo(string);
+            setGraphic(CC.getBox());
         }
     }
 }

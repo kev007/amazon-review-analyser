@@ -1,6 +1,11 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -15,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class Controller implements Initializable {
     @FXML
@@ -27,12 +33,12 @@ public class Controller implements Initializable {
     private MenuItem menuPrintLocal;
 
     @FXML
-    public ListView<String> crawlerList;
+    private ListView<String> listView;
 
-    @FXML
-    private HBox hbox;
-
-    ListView<String> listview;
+    public Controller()
+    {
+        System.out.printf("Starting Controller");
+    }
 
     @FXML
     public void getItem(ActionEvent event) throws IOException, ParseException,
@@ -47,11 +53,11 @@ public class Controller implements Initializable {
         /**
          * Basic input check
          * Execute crawl command
-         * get all ASIN and give them too the listview for the GUI
+         * get all ASIN and give them too the listView for the GUI
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);
-            listview.setItems(Main.IM.getAllStrings());
+            listView.setItems(Main.IM.getAllStrings());
         } else {
             System.out.print("CHECK INPUT\n");
         }
@@ -73,16 +79,13 @@ public class Controller implements Initializable {
         assert fieldASIN != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainWindowView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainWindowView.fxml'.";
 
-        listview = new ListView<>(Main.IM.getAllStrings());
+        listView.setItems(Main.IM.getAllStrings());
 
-        listview.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-            public ListCell<String> call(ListView<String> param) {
+        listView.setCellFactory(new Callback<ListView<String>, javafx.scene.control.ListCell<String>>() {
+            public ListCell<String> call(ListView<String> listView) {
 //                return new ListViewCell();
                 return new ItemCell();
             }
         });
-
-        hbox.getChildren().add(listview);
-        HBox.setHgrow(listview, Priority.ALWAYS);
     }
 }

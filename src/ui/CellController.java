@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
@@ -25,8 +26,15 @@ public class CellController {
     @FXML
     BorderPane borderPane;
 
+    @FXML
+    private HBox hBox;
+    @FXML
+    private Label label1;
+    @FXML
+    private Label label2;
+
     public CellController() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/ItemCell.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ui/ListViewCell.fxml"));
         fxmlLoader.setController(this);
         try
         {
@@ -37,20 +45,24 @@ public class CellController {
             throw new RuntimeException(e);
         }
 
-        delButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println(tempLabel.getText() + " : delete"); // + event
-            }
-        });
+//        delButton.setOnAction(new EventHandler<ActionEvent>() {
+//            public void handle(ActionEvent event) {
+//                System.out.println(tempLabel.getText() + " : delete"); // + event
+//            }
+//        });
     }
 
-    public void setInfo(String string)
-    {
-        tempLabel.setText(string);
+    public void setInfo(String string) {
+//        tempLabel.setText(string);
+        label1.setText(string);
+        label2.setText(string);
     }
 
-    public BorderPane getPane()
-    {
-        return borderPane;
+    public HBox getBox() {
+        return hBox;
     }
+
+//    public BorderPane getPane() {
+//        return borderPane;
+//    }
 }

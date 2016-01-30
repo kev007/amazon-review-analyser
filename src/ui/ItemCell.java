@@ -15,15 +15,31 @@ import javafx.scene.layout.Priority;
  * http://stackoverflow.com/questions/19588029/customize-listview-in-javafx-with-fxml
  */
 public class ItemCell extends ListCell<String> {
-    @Override
-    public void updateItem(String string, boolean empty)
-    {
-        super.updateItem(string,empty);
-        if(string != null)
-        {
-            CellController cell = new CellController();
-            cell.setInfo(string);
-            setGraphic(cell.getPane());
+    HBox hbox = new HBox();
+    Label label = new Label("(empty)");
+    Pane pane = new Pane();
+    Button button = new Button("delete");
+
+    public ItemCell() {
+        super();
+
+        hbox.getChildren().addAll(label, pane, button);
+        HBox.setHgrow(pane, Priority.ALWAYS);
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                System.out.println(label.getText() + " : delete"); // + event
+            }
+        });
+    }
+
+    protected void updateItem(String ASIN, boolean empty) {
+        super.updateItem(ASIN, empty);
+        setText(null);  // No text in label of super class
+        if (empty) {
+            setGraphic(null);
+        } else {
+            label.setText(ASIN);
+            setGraphic(hbox);
         }
     }
 }
