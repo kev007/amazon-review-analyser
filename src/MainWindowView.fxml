@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <MenuBar prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -30,11 +31,31 @@
             </Menu>
         </menus>
       </MenuBar>
-      <FlowPane layoutX="25.0" layoutY="90.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-         <children>
-            <TextField fx:id="fieldASIN" prefHeight="39.0" prefWidth="391.0" text="B00NMJJXU4" />
-            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" text="Get Item" />
-         </children>
-      </FlowPane>
+      <SplitPane dividerPositions="0.5, 0.5" maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+         <items>
+            <BorderPane maxWidth="400.0" prefHeight="200.0" prefWidth="200.0">
+               <top>
+                  <FlowPane BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="fieldASIN" prefHeight="39.0" prefWidth="200.0" text="B00NMJJXU4" />
+                        <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" text="Get Item" />
+                     </children>
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </BorderPane.margin>
+                  </FlowPane>
+               </top>
+               <center>
+                  <ListView fx:id="crawlerList" maxHeight="425.0" maxWidth="400.0" prefHeight="425.0" prefWidth="400.0" BorderPane.alignment="TOP_CENTER">
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                  </ListView>
+               </center>
+            </BorderPane>
+            <BorderPane maxHeight="600.0" maxWidth="400.0" prefHeight="600.0" prefWidth="400.0" />
+            <BorderPane maxWidth="400.0" prefHeight="200.0" prefWidth="200.0" />
+         </items>
+      </SplitPane>
    </children>
 </AnchorPane>

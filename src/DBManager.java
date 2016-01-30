@@ -1,7 +1,5 @@
 import crawler.Item;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -66,7 +64,6 @@ public class DBManager extends Thread {
             e.printStackTrace();
         }
     }
-
 
     /**
      *  The Deamon DBManager Loop
