@@ -1,4 +1,3 @@
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -30,8 +29,6 @@ public class Controller {
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
 
-        ObservableList data;
-
         /**
          * Read user input from GUI
          */
@@ -40,16 +37,20 @@ public class Controller {
         /**
          * Basic input check
          * Execute crawl command
+         * get all ASIN and give them too the listview for the GUI
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);
-            data = Main.IM.getAll();
-            crawlerList.setItems(data);
+            crawlerList.setItems(Main.IM.getAllStrings());
         } else {
             System.out.print("CHECK INPUT\n");
         }
     }
 
+    /**
+     * print all crawled stuff for debuggging purposes
+     * @param event
+     */
     @FXML
     public void debugPrintLocal(ActionEvent event) {
         Main.IM.printLocal();

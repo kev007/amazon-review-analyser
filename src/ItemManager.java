@@ -88,14 +88,16 @@ public class ItemManager {
         return item;
     }
 
-    public ObservableList getAll() {
+    /**
+     * returns all ASIN as Strings by iterating through the localItems hashmap
+     * @return
+     */
+    public ObservableList getAllStrings() {
         ObservableList data = FXCollections.observableArrayList();
 
-        Set set = localItems.entrySet();
-        Iterator iterator = set.iterator();
+        Iterator iterator = localItems.entrySet().iterator();
         while(iterator.hasNext()) {
             Map.Entry mentry = (Map.Entry)iterator.next();
-//            data.add(mentry.getValue());
             data.add(mentry.getKey().toString());
         }
 
