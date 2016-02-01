@@ -63,6 +63,7 @@ public class ItemCell extends ListCell<Item> {
         } else {
             labelID.setText(item!=null ? " " + item.itemID + " " : "<null>");
             labelName.setText(item!=null ? item.itemName : "<null>");
+            button.setId(item.itemID);
             setGraphic(hbox);
         }
     }

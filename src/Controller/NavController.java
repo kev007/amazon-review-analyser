@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -51,20 +52,25 @@ public class NavController implements Initializable {
         listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("clicked on " + listView.getSelectionModel().getSelectedItem().itemID);
+                System.out.println("Item clicked: " + listView.getSelectionModel().getSelectedItem().itemID);
             }
         });
 
         navEvent = new EventHandler() {
             @Override
             public void handle(Event event) {
-                System.out.println("handle event: " + event);
-                event.consume();
+                Parent p = (Parent) event.getSource();
+
+                System.out.println("Delete button clicked: " + p.getId());
+//                event.consume();
+
+                Main.IM.remove(p.getId());
+                updateListView();
             }
         };
 
         Main.IM.get("B00NMJJXU4");
-        listView.setItems(Main.IM.getAllCollection());
+        updateListView();
 //        CellController CC = new CellController();
 
         listView.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
@@ -73,6 +79,10 @@ public class NavController implements Initializable {
 //                return new ListViewCell(CC);
             }
         });
+    }
+
+    public void updateListView() {
+        listView.setItems(Main.IM.getAllCollection());
     }
 
     @FXML
@@ -92,9 +102,11 @@ public class NavController implements Initializable {
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);
-            listView.setItems(Main.IM.getAllCollection());
+            updateListView();
         } else {
             System.out.print("INVALID INPUT\n");
         }
     }
+
+
 }
