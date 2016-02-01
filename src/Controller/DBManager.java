@@ -1,4 +1,6 @@
-import crawler.Item;
+package Controller;
+
+import Model.Item;
 
 import java.util.LinkedList;
 
@@ -46,7 +48,7 @@ public class DBManager extends Thread {
     }
 
     /**
-     * Add Amazon ASIN to crawler
+     * Add Amazon ASIN to Model
      */
     public void addItem(Item asinItem) {
         this.writeQueue.add(asinItem);

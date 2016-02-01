@@ -1,3 +1,5 @@
+package Controller;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +13,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.io.IOException;
 
-
 public class Main extends Application {
     public static DBManager DBM;
     public static ItemManager IM;
@@ -23,7 +24,7 @@ public class Main extends Application {
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
 
-        root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/View/MainView.fxml"));
         scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setWidth(1200);
@@ -39,7 +40,6 @@ public class Main extends Application {
         IM = new ItemManager();
 
         launch(args);
-
 
         //Main.IM.get("B00A378L4C");
         //Main.IM.get("B00NMJJXU4");

@@ -1,4 +1,4 @@
-package ui.fxmlCell;
+package View.fxmlCell;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

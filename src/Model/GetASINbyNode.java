@@ -1,4 +1,4 @@
-package crawler;
+package Model;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -10,8 +10,6 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
 import org.joda.time.DateTime;
 
 /**

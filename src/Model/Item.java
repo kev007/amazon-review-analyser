@@ -1,4 +1,4 @@
-package crawler;
+package Model;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;

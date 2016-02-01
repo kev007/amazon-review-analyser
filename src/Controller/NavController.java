@@ -1,5 +1,6 @@
-package ui;
+package Controller;
 
+import View.ItemCell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,10 +66,10 @@ public class NavController implements Initializable {
          * get all ASIN and give them too the listView for the GUI
          */
         if (ASIN.length() == 10) {
-//            Main.IM.get(ASIN);
-//            listView.setItems(Main.IM.getAllStrings());
+            Main.IM.get(ASIN);
+            listView.setItems(Main.IM.getAllStrings());
         } else {
-            System.out.print("CHECK INPUT\n");
+            System.out.print("INVALID INPUT\n");
         }
     }
 }

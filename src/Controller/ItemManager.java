@@ -1,4 +1,6 @@
-import crawler.Item;
+package Controller;
+
+import Model.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -76,7 +78,7 @@ public class ItemManager {
     }
 
     /**
-     * start new crawler thread for given ASIN
+     * start new Model thread for given ASIN
      */
     public Item crawl(int thread, String ASIN) {
         Item item = new Item(ASIN);
@@ -106,7 +108,7 @@ public class ItemManager {
 
 
     /**
-     * runnable crawler: crawl amazon.com for customer reviews for given ASIN
+     * runnable Model: crawl amazon.com for customer reviews for given ASIN
      */
     class Crawler implements Runnable{
         private int thread;

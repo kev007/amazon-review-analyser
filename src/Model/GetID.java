@@ -1,4 +1,4 @@
-package crawler;
+package Model;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

@@ -1,4 +1,4 @@
-package crawler;
+package Model;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +15,7 @@ import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
 /**
- * Handles crawler.Item ID lists (merge, add, write to file etc.) Contains a Set (no
+ * Handles Model.Item ID lists (merge, add, write to file etc.) Contains a Set (no
  * duplicate) of item IDs
  * 
  * @author Feng Mai
@@ -28,7 +28,7 @@ public class ItemList {
 
 	/**
 	 * @param file
-	 *            A file that contains crawler.ItemList, one line each item id
+	 *            A file that contains Model.ItemList, one line each item id
 	 * @throws FileNotFoundException
 	 */
 	public ItemList(String file) throws FileNotFoundException {
@@ -49,7 +49,7 @@ public class ItemList {
 	}
 
 	/**
-	 * For the current crawler.Item ID List, read all item reviews
+	 * For the current Model.Item ID List, read all item reviews
 	 * 
 	 * @param database
 	 *            The review database to be written in; if database file does not exist create a new database
@@ -80,7 +80,7 @@ public class ItemList {
 	}
 
 	/**
-	 * Divide a crawler.ItemList into n smaller lists (for possible threading)
+	 * Divide a Model.ItemList into n smaller lists (for possible threading)
 	 * @param npartition Number of separated list to be divided into
 	 * @return
 	 */

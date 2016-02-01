@@ -38,7 +38,7 @@
     1. SQLite Database
     2. Database struktur
 3. Programmstruktur
-    1. Objekts (crawler/Item sehr wichtig)
+    1. Objekts (Model/Item sehr wichtig)
 4.
  
 ---
@@ -46,7 +46,7 @@
 ---
 ## README
 
-A Java crawler to collect and analyse product reviews on Amazon.com.
+A Java Model to collect and analyse product reviews on Amazon.com.
 
 Updated: 2016-01-29
 
@@ -60,14 +60,14 @@ Description
 
 ## Common Exceptions
 1. java.io.IOException means that the item no longer exist on Amazon.com. You do not have to do anything with that item.
-2. java.net.SocketTimeoutException means that connection to the website is taking too long. Rerun the crawler on the items with this exception.
+2. java.net.SocketTimeoutException means that connection to the website is taking too long. Rerun the Model on the items with this exception.
 
 ## Licence
 The code is released into public domain.
 
 ## Sources
 * "Market Dynamics and User-Generated Content about Tablet Computers" by Xin (Shane) Wang, Feng Mai and Roger H.L. Chiang, Marketing Science 33.3 (2014): 449-458
-    [customer-review-crawler](https://github.com/maifeng/customer-review-crawler)
+    [customer-review-Model](https://github.com/maifeng/customer-review-Model)
 * 
 * 
 * 

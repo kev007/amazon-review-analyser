@@ -1,4 +1,4 @@
-package ui.fxmlCell;
+package View.fxmlCell;
 
 import javafx.scene.control.ListCell;
 
