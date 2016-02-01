@@ -11,7 +11,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NavController">
    <center>
-      <ListView fx:id="listView" BorderPane.alignment="TOP_CENTER">
+      <ListView fx:id="listView" focusTraversable="false" BorderPane.alignment="TOP_CENTER">
          <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" />
          </BorderPane.margin>
@@ -20,21 +20,21 @@
    <top>
       <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <left>
-            <Button fx:id="debug" mnemonicParsing="false" onAction="#debugFunc" prefHeight="30.0" text="[Debug] Refresh" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets left="5.0" right="5.0" />
-               </BorderPane.margin>
-            </Button>
+            <!--<Button fx:id="debug" mnemonicParsing="false" onAction="#debugFunc" prefHeight="30.0" text="[Debug] Refresh" BorderPane.alignment="CENTER">-->
+               <!--<BorderPane.margin>-->
+                  <!--<Insets left="5.0" right="5.0" />-->
+               <!--</BorderPane.margin>-->
+            <!--</Button>-->
          </left>
          <right>
-            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" onKeyReleased="#getItem" prefHeight="30.0" text="Get Item" BorderPane.alignment="CENTER">
+            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" onKeyReleased="#getItem" prefHeight="37.0" text="Get Item" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />
                </BorderPane.margin>
             </Button>
          </right>
          <center>
-            <TextField fx:id="amazonField" minWidth="250.0" onKeyPressed="#getItem" prefHeight="39.0" prefWidth="275.0" text="http://www.amazon.com/dp/B00NMJJXU4" BorderPane.alignment="CENTER">
+            <TextField fx:id="amazonField" minWidth="250.0" onKeyPressed="#getItem" prefHeight="39.0" prefWidth="275.0" promptText="Input Amazon URL or ASIN and press 'Enter' or &quot;Get Item&quot;" text="http://www.amazon.com/dp/B00NMJJXU4" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="5.0" />
                </BorderPane.margin></TextField>

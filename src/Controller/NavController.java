@@ -2,6 +2,9 @@ package Controller;
 
 import Model.Item;
 import View.ItemCell;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -98,6 +101,13 @@ public class NavController implements Initializable {
 //                return new ListViewCell(CC);
             }
         });
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+//                amazonField.requestFocus();
+            }
+        });
     }
 
     public void updateListView() {
@@ -118,7 +128,6 @@ public class NavController implements Initializable {
 
     @FXML
     public void getItem() {
-
         /**
          * Read user input from GUI
          */
@@ -142,7 +151,7 @@ public class NavController implements Initializable {
         if (matcher.find()) {
             ASIN = matcher.group(1);
         } else {
-            System.out.println("NO AMAZON URL RESULTS FOUND FOR:  " + input);
+//            System.out.println("NO AMAZON URL MATCH FOUND FOR:  " + input);
         }
 
         /**
