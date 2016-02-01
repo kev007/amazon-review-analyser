@@ -60,9 +60,11 @@
                </top>
             </BorderPane>
             <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER" >
+                <!--
                 <children>
                     <fx:include fx:id="embeddedRedView" source="MainTableView.fxml" />
                 </children>
+                -->
             </BorderPane>
             <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
             </BorderPane>
