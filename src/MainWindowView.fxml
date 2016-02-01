@@ -34,8 +34,7 @@
         </menus>
       </MenuBar>
       <SplitPane dividerPositions="0.4, 0.7" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
-         <items>
-            <BorderPane minWidth="350.0">
+            <BorderPane maxWidth="400.0" minWidth="350.0">
                <center>
                    <ListView fx:id="listView" BorderPane.alignment="TOP_CENTER">
                        <BorderPane.margin>
@@ -60,9 +59,13 @@
                   </BorderPane>
                </top>
             </BorderPane>
-            <BorderPane minWidth="250.0" />
-            <BorderPane minWidth="250.0" />
-         </items>
+            <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER" >
+                <children>
+                    <fx:include fx:id="embeddedRedView" source="MainTableView.fxml" />
+                </children>
+            </BorderPane>
+            <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+            </BorderPane>
       </SplitPane>
    </children>
 </AnchorPane>

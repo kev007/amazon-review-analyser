@@ -79,8 +79,8 @@ public class Controller implements Initializable {
 
         listView.setCellFactory(new Callback<ListView<String>, javafx.scene.control.ListCell<String>>() {
             public ListCell<String> call(ListView<String> listView) {
-//                return new ListViewCell();
-                return new ItemCell();
+                return new ListViewCell();
+//                return new ItemCell();
             }
         });
     }
