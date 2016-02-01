@@ -16,6 +16,7 @@ import java.io.IOException;
 public class Main extends Application {
     public static DBManager DBM;
     public static ItemManager IM;
+    public static MainController MC;
     public static Scene scene;
     public static Parent root;
 

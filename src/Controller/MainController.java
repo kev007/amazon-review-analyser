@@ -12,10 +12,17 @@ public class MainController implements Initializable {
     @FXML
     private MenuItem menuPrintLocal;
 
+    public static NavController NC;
+
     public MainController() {
         System.out.printf("Starting MainController\n");
         //this constructor is run before the GUI
         //put stuff in initialize() instead
+        Main.MC = this;
+    }
+
+    public void refresh() {
+        NC.refresh();
     }
 
     /**

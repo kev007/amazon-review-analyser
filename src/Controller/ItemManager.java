@@ -156,6 +156,9 @@ public class ItemManager {
             System.out.println(thread + ". Crawler complete for: " + (char)27 + "[32m" + this.item.itemName + (char)27 + "[0m");
 
             Main.DBM.addItem(item);
+
+//            Main.NC.updateListView();
+            Main.MC.refresh();
         }
     }
 }

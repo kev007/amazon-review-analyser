@@ -25,9 +25,12 @@ public class ItemCell extends ListCell<Item> {
     HBox hbox = new HBox();
     Label labelID = new Label("(ID)");
     Label labelName = new Label("(Name)");
-    Pane pane = new Pane();
+    Pane separator = new Pane();
+    Pane separator2 = new Pane();
     Button button = new Button("delete");
     ProgressBar pb = new ProgressBar(0.0);
+    Label progress = new Label("Starting");
+    Label percent = new Label("0%");
 
     /**
      *
@@ -36,10 +39,16 @@ public class ItemCell extends ListCell<Item> {
         super();
         this.navEvent = navEvent;
         cell = this;
+        progress.setText("Starting");
+        percent.setText("0%");
 
-        labelName.setMaxWidth(300);
-        hbox.getChildren().addAll(pb, labelID, labelName, pane, button);
-        HBox.setHgrow(pane, Priority.ALWAYS);
+        labelID.setMinWidth(90);
+        labelName.setMaxWidth(200);
+        progress.setMinWidth(50);
+        percent.setMinWidth(40);
+
+        hbox.getChildren().addAll(progress, pb, percent, separator, labelID, labelName, separator2, button);
+        HBox.setHgrow(separator2, Priority.ALWAYS);
 
         button.addEventHandler(ActionEvent.ACTION, navEvent);
 
@@ -64,6 +73,16 @@ public class ItemCell extends ListCell<Item> {
             labelID.setText(item!=null ? " " + item.itemID + " " : "<null>");
             labelName.setText(item!=null ? item.itemName : "<null>");
             button.setId(item.itemID);
+            if (item.progress <= 0) {
+                if (item.progress < 0) {
+                    progress.setText("ERROR");
+                }
+            } else {
+                progress.setText(item.progress + "/" + item.total);
+                percent.setText(item.progress*100/item.total + "%");
+            }
+            pb.setProgress((double) item.progress/item.total);
+
             setGraphic(hbox);
         }
     }

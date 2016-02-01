@@ -19,11 +19,19 @@
    </center>
    <top>
       <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <left>
+            <Button fx:id="debug" mnemonicParsing="false" onAction="#debugFunc" prefHeight="30.0" text="[Debug] Refresh" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </BorderPane.margin>
+            </Button>
+         </left>
          <right>
             <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" prefHeight="30.0" text="Get Item" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />
-               </BorderPane.margin></Button>
+               </BorderPane.margin>
+            </Button>
          </right>
          <center>
             <TextField fx:id="fieldASIN" minWidth="250.0" prefHeight="39.0" prefWidth="275.0" text="B00NMJJXU4" BorderPane.alignment="CENTER">

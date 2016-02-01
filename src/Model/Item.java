@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Main;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -37,6 +38,8 @@ public class Item {
 	public Item(String theitemid) {
 		itemID = theitemid;
 		itemName = "Unknown";
+		progress = 0;
+		total = 1;
 		reviews = new ArrayList<Review>();
 	}
 
@@ -69,6 +72,7 @@ public class Item {
 			//get product name
 			itemName = reviewpage1.select("div.a-row.product-title").select("a.a-size-large.a-link-normal").text();
 //			System.out.println("Name: " + itemName);
+			total = maxpage;
 
 			// collect review from each of the review pages;
 			for (int p = 1; p <= maxpage; p = p + 1) {
@@ -89,10 +93,13 @@ public class Item {
 					}
 				}
 				//TODO: event - progress
+				progress = p;
+				Main.MC.refresh();
 			}
 
 		} catch (Exception e) {
 			System.out.println(itemID + " " + "Exception" + " " + e.getClass());
+			progress = -1;
 		}
 
 	}
@@ -341,4 +348,6 @@ public class Item {
 	public String itemID;
 	public String itemName;
 	public ArrayList<Review> reviews;
+	public int total = 1;
+	public int progress = 0;
 }

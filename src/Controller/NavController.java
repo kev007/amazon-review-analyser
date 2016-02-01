@@ -42,6 +42,7 @@ public class NavController implements Initializable {
         System.out.printf("Starting NavController\n");
         //this constructor is run before the GUI
         //put stuff in initialize() instead
+        Main.MC.NC = this;
     }
 
     @FXML
@@ -69,8 +70,8 @@ public class NavController implements Initializable {
             }
         };
 
-        Main.IM.get("B00NMJJXU4");
-        updateListView();
+//        Main.IM.get("B00NMJJXU4");
+//        updateListView();
 //        CellController CC = new CellController();
 
         listView.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
@@ -83,6 +84,18 @@ public class NavController implements Initializable {
 
     public void updateListView() {
         listView.setItems(Main.IM.getAllCollection());
+        listView.refresh();
+    }
+
+    public void refresh() {
+        listView.refresh();
+    }
+
+    @FXML
+    public void debugFunc() {
+        System.out.println("DEBUG button pressed");
+//        updateListView();
+        refresh();
     }
 
     @FXML
