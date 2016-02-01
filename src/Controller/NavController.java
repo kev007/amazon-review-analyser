@@ -30,7 +30,7 @@ public class NavController implements Initializable {
     @FXML
     private Button getButton;
     @FXML
-    private ListView<Item> listView;
+    public ListView<Item> listView;
 
     public NavController() {
         System.out.printf("Starting NavController\n");
@@ -64,7 +64,7 @@ public class NavController implements Initializable {
         /**
          * Basic input check
          * Execute crawl command
-         * get all ASIN and give them too the listView for the GUI
+         * get all Items and give them too the listView for the GUI
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);
