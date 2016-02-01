@@ -23,7 +23,7 @@ public class Main extends Application {
             ClassNotFoundException, SQLException, InvalidKeyException,
             NoSuchAlgorithmException, InterruptedException {
 
-        root = FXMLLoader.load(getClass().getResource("MainWindowView.fxml"));
+        root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
         scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setWidth(1200);
