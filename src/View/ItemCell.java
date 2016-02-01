@@ -1,5 +1,6 @@
 package View;
 
+import Controller.NavController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -20,16 +21,24 @@ public class ItemCell extends ListCell<String> {
     Pane pane = new Pane();
     Button button = new Button("delete");
 
+    /**
+     *
+     */
     public ItemCell() {
         super();
 
         hbox.getChildren().addAll(label, pane, button);
         HBox.setHgrow(pane, Priority.ALWAYS);
+
+        button.addEventHandler(ActionEvent.ACTION, NavController.navEvent);
+
+        /**
         button.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                System.out.println(label.getText() + " : delete"); // + event
+                System.out.println(label.getText() + " : delete" + event); // + event
             }
         });
+         */
     }
 
     protected void updateItem(String ASIN, boolean empty) {

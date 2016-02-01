@@ -2,6 +2,8 @@ package Controller;
 
 import View.ItemCell;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,6 +26,10 @@ import java.util.ResourceBundle;
  * http://stackoverflow.com/questions/19588029/customize-listview-in-javafx-with-fxml
  */
 public class NavController implements Initializable {
+
+
+    public static EventHandler navEvent;
+
     @FXML
     private TextField fieldASIN;
     @FXML
@@ -41,6 +47,15 @@ public class NavController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         assert fieldASIN != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainView.fxml'.";
+
+        this.navEvent = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+              System.out.println("handle event");
+                event.consume();
+            }
+        };
+
 
         listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             public ListCell<String> call(ListView<String> listView) {
