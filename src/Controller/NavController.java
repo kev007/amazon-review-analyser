@@ -57,7 +57,9 @@ public class NavController implements Initializable {
         listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("Item clicked: " + listView.getSelectionModel().getSelectedItem().itemID);
+                String ASIN = listView.getSelectionModel().getSelectedItem().itemID;
+                System.out.println("Item clicked: " + ASIN);
+                amazonField.setText(ASIN);
             }
         });
 
@@ -66,8 +68,11 @@ public class NavController implements Initializable {
             public void handle(Event event) {
                 Parent p = (Parent) event.getSource();
 
-                System.out.println("Delete button clicked: " + p.getId());
+                String ASIN = p.getId();
+
+                System.out.println("Delete button clicked: " + ASIN);
 //                event.consume();
+                amazonField.setText(ASIN);
 
                 Main.IM.remove(p.getId());
                 updateListView();
@@ -147,6 +152,7 @@ public class NavController implements Initializable {
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);
+            amazonField.setText("");
             updateListView();
         } else {
             System.out.print("INVALID INPUT\n");
