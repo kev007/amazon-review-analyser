@@ -27,14 +27,14 @@
             </Button>
          </left>
          <right>
-            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" prefHeight="30.0" text="Get Item" BorderPane.alignment="CENTER">
+            <Button fx:id="getButton" mnemonicParsing="false" onAction="#getItem" onKeyReleased="#getItem" prefHeight="30.0" text="Get Item" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="5.0" right="5.0" />
                </BorderPane.margin>
             </Button>
          </right>
          <center>
-            <TextField fx:id="fieldASIN" minWidth="250.0" prefHeight="39.0" prefWidth="275.0" text="http://www.amazon.com/dp/B00NMJJXU4" BorderPane.alignment="CENTER">
+            <TextField fx:id="amazonField" minWidth="250.0" onKeyPressed="#getItem" prefHeight="39.0" prefWidth="275.0" text="http://www.amazon.com/dp/B00NMJJXU4" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="5.0" />
                </BorderPane.margin></TextField>

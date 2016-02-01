@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 
 /**
  * Created by Kevin on 29.01.2016.
@@ -149,11 +150,15 @@ public class ItemManager {
         }
 
         public void run() {
-            System.out.println(thread + ". Running " + (char)27 + "[31m" + this.ASIN + (char)27 + "[0m");
+            System.out.println(thread + ". Running " + (char)27 + "[32m" + this.ASIN + (char)27 + "[0m");
 
-            this.item.fetchReview();
+            Boolean success = this.item.fetchReview();
 
-            System.out.println(thread + ". Crawler complete for: " + (char)27 + "[32m" + this.item.itemName + (char)27 + "[0m");
+            if (success) {
+                System.out.println(thread + ". Crawler " + (char)27 + "[32m" + "COMPLETE" +  (char)27 + "[0m" + " for item: " + (char)27 + "[32m" + this.item.itemName + (char)27 + "[0m");
+            } else {
+                System.out.println(thread + ". Crawler " + (char)27 + "[31m" + "FAILED"   +  (char)27 + "[0m" + " for item: " + (char)27 + "[32m" + this.item.itemName + (char)27 + "[0m");
+            }
 
             Main.DBM.addItem(item);
 

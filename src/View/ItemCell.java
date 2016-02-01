@@ -44,7 +44,7 @@ public class ItemCell extends ListCell<Item> {
 
         labelID.setMinWidth(90);
         labelName.setMaxWidth(200);
-        progress.setMinWidth(50);
+        progress.setMinWidth(40);
         percent.setMinWidth(40);
 
         hbox.getChildren().addAll(progress, pb, percent, separator, labelID, labelName, separator2, button);

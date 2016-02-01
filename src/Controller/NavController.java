@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
@@ -34,7 +36,7 @@ public class NavController implements Initializable {
     public EventHandler navEvent;
 
     @FXML
-    private TextField fieldASIN;
+    private TextField amazonField;
     @FXML
     private Button getButton;
     @FXML
@@ -49,7 +51,7 @@ public class NavController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        assert fieldASIN != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainView.fxml'.";
+        assert amazonField != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainView.fxml'.";
 
         listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -71,6 +73,15 @@ public class NavController implements Initializable {
                 updateListView();
             }
         };
+
+        amazonField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER)  {
+                    getItem();
+                }
+            }
+        });
 
 //        Main.IM.get("B00NMJJXU4");
 //        updateListView();
@@ -101,14 +112,12 @@ public class NavController implements Initializable {
     }
 
     @FXML
-    public void getItem(ActionEvent event) throws IOException, ParseException,
-            ClassNotFoundException, SQLException, InvalidKeyException,
-            NoSuchAlgorithmException, InterruptedException {
+    public void getItem() {
 
         /**
          * Read user input from GUI
          */
-        String input = fieldASIN.getText();     //Test value: "B00NMJJXU4"
+        String input = amazonField.getText();     //Test value: "B00NMJJXU4"
         String ASIN = input;
 
 
@@ -143,6 +152,4 @@ public class NavController implements Initializable {
             System.out.print("INVALID INPUT\n");
         }
     }
-
-
 }

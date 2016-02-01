@@ -50,7 +50,7 @@ public class Item {
 	/**
 	 * Fetch all reviews for the item from Amazon.com
 	 */
-	public void fetchReview() {
+	public boolean fetchReview() {
 		String url = "http://www.amazon.com/product-reviews/" + itemID
 				+ "/?showViewpoints=0&sortBy=byRankDescending&pageNumber=" + 1;
 		try {
@@ -96,12 +96,12 @@ public class Item {
 				progress = p;
 				Main.MC.refresh();
 			}
-
+			return true;
 		} catch (Exception e) {
 			System.out.println(itemID + " " + "Exception " +  e.getClass() + " \t " + e.getMessage());
 			progress = -1;
 		}
-
+		return false;
 	}
 
 	/**
