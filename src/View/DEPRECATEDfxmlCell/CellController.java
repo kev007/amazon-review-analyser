@@ -1,4 +1,4 @@
-package View.fxmlCell;
+package View.DEPRECATEDfxmlCell;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

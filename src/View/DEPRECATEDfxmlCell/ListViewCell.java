@@ -1,9 +1,11 @@
-package View.fxmlCell;
+package View.DEPRECATEDfxmlCell;
 
 import javafx.scene.control.ListCell;
 
 /**
  * Created by kev_s on 30.01.2016.
+ *
+ * http://stackoverflow.com/questions/19588029/customize-listview-in-javafx-with-fxml
  */
 public class ListViewCell extends ListCell<String> {
     @Override
@@ -18,4 +20,15 @@ public class ListViewCell extends ListCell<String> {
 //            setGraphic(CC.getPane());
         }
     }
+
+//    public void updateItem(String ASIN, boolean empty) {
+//        super.updateItem(ASIN, empty);
+//        setText(null);  // No text in label of super class
+//        if (empty) {
+//            setGraphic(null);
+//        } else {
+//            label.setText(ASIN);
+//            setGraphic(hbox);
+//        }
+//    }
 }
