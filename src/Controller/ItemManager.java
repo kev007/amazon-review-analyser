@@ -48,6 +48,19 @@ public class ItemManager {
     }
 
     /**
+     * return localItems for corresponding ASIN, crawl and return if not locally available
+     * @param ASIN
+     */
+    public void remove(String ASIN) {
+        if (localItems.containsKey(ASIN)) {
+            System.out.println(ASIN + " found locally in localItems and deleted: " + localItems.get(ASIN).itemID);
+            localItems.remove(ASIN);
+        } else {
+            System.out.println(ASIN + " not found locally in localItems: ");
+        }
+    }
+
+    /**
      * for a given ASIN, removes it from localItems
      * @param ASIN
      */
@@ -102,7 +115,21 @@ public class ItemManager {
             Map.Entry mentry = (Map.Entry)iterator.next();
             data.add(mentry.getKey().toString());
         }
+        return data;
+    }
 
+    /**
+     * returns all Items an Item Collection by iterating through the localItems hashmap
+     * @return
+     */
+    public ObservableList getAllCollection() {
+        ObservableList data = FXCollections.observableArrayList();
+
+        Iterator iterator = localItems.entrySet().iterator();
+        while(iterator.hasNext()) {
+            Map.Entry mentry = (Map.Entry)iterator.next();
+            data.add(mentry.getValue());
+        }
         return data;
     }
 
