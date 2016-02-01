@@ -22,6 +22,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by kev_s on 30.01.2016.
@@ -106,7 +108,28 @@ public class NavController implements Initializable {
         /**
          * Read user input from GUI
          */
-        String ASIN = fieldASIN.getText();     //Test value: "B00NMJJXU4"
+        String input = fieldASIN.getText();     //Test value: "B00NMJJXU4"
+        String ASIN = input;
+
+
+        /**
+         * REGEX TESTERS:
+         * https://regex101.com/
+         * http://www.ocpsoft.org/tutorials/regular-expressions/java-visual-regex-tester/
+         * http://regexr.com/
+         *
+         * REGEX TEST: http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)
+         */
+
+        String regex="http:\\/\\/(?:www\\.|)amazon\\.com\\/(?:gp\\/product|[^\\/]+\\/dp|dp)\\/([^\\/]+)";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.find()) {
+            ASIN = matcher.group(1);
+        } else {
+            System.out.println("NO AMAZON URL RESULTS FOUND FOR:  " + input);
+        }
 
         /**
          * Basic input check

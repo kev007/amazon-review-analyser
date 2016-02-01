@@ -12,6 +12,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main extends Application {
     public static DBManager DBM;
@@ -36,11 +38,26 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+//        debug();
         DBM = new DBManager("test.db");
         DBM.start();
         IM = new ItemManager();
-
         launch(args);
+    }
+
+    public static void debug() {
+        String ASIN = "http://www.amazon.com/CM-Storm-QuickFire-TK-Mechanical/dp/B00A378L4C/ref=pd_sim_147_2?ie=UTF8&dpID=31wokVpI8eL&dpSrc=sims&preST=_AC_UL160_SR160%2C160_&refRID=1C10ZYGJTRPXCSBW90PM";
+
+        String regex="http:\\/\\/(?:www\\.|)amazon\\.com\\/(?:gp\\/product|[^\\/]+\\/dp|dp)\\/([^\\/]+)";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(ASIN);
+        if (matcher.find()) {
+            ASIN = matcher.group(1);
+        } else {
+            System.out.println("NO MATCH");
+        }
+        System.out.println("ASIN REGEX: " + ASIN);
 
         //Main.IM.get("B00A378L4C");
         //Main.IM.get("B00NMJJXU4");

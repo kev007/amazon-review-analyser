@@ -34,7 +34,7 @@
             </Button>
          </right>
          <center>
-            <TextField fx:id="fieldASIN" minWidth="250.0" prefHeight="39.0" prefWidth="275.0" text="B00NMJJXU4" BorderPane.alignment="CENTER">
+            <TextField fx:id="fieldASIN" minWidth="250.0" prefHeight="39.0" prefWidth="275.0" text="http://www.amazon.com/dp/B00NMJJXU4" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="5.0" />
                </BorderPane.margin></TextField>

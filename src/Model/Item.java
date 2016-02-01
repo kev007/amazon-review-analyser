@@ -98,7 +98,7 @@ public class Item {
 			}
 
 		} catch (Exception e) {
-			System.out.println(itemID + " " + "Exception" + " " + e.getClass());
+			System.out.println(itemID + " " + "Exception " +  e.getClass() + " \t " + e.getMessage());
 			progress = -1;
 		}
 

@@ -83,7 +83,7 @@ public class ItemManager {
         while(iterator.hasNext()) {
             total++;
             Map.Entry mentry = (Map.Entry)iterator.next();
-            System.out.print("key is: "+ mentry.getKey() + " & Value is: ");
+            System.out.print(total + ". "+ mentry.getKey() + " - ");
             System.out.println(mentry.getValue());
         }
 
