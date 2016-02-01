@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Item;
 import View.ItemCell;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -26,8 +27,6 @@ import java.util.ResourceBundle;
  * http://stackoverflow.com/questions/19588029/customize-listview-in-javafx-with-fxml
  */
 public class NavController implements Initializable {
-
-
     public static EventHandler navEvent;
 
     @FXML
@@ -35,7 +34,7 @@ public class NavController implements Initializable {
     @FXML
     private Button getButton;
     @FXML
-    private ListView<String> listView;
+    public ListView<Item> listView;
 
     public NavController() {
         System.out.printf("Starting NavController\n");
@@ -56,11 +55,14 @@ public class NavController implements Initializable {
             }
         };
 
+        Main.IM.get("B00NMJJXU4");
+        listView.setItems(Main.IM.getAllCollection());
+//        CellController CC = new CellController();
 
-        listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-            public ListCell<String> call(ListView<String> listView) {
-//                return new ListViewCell();
+        listView.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
+            public ListCell<Item> call(ListView<Item> listView) {
                 return new ItemCell();
+//                return new ListViewCell(CC);
             }
         });
     }
@@ -82,7 +84,7 @@ public class NavController implements Initializable {
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);
-            listView.setItems(Main.IM.getAllStrings());
+            listView.setItems(Main.IM.getAllCollection());
         } else {
             System.out.print("INVALID INPUT\n");
         }
