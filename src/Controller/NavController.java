@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Item;
 import View.ItemCell;
+import View.fxmlCell.CellController;
+import View.fxmlCell.ListViewCell;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,10 +45,14 @@ public class NavController implements Initializable {
         assert fieldASIN != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainView.fxml'.";
 
+        Main.IM.get("B00NMJJXU4");
+        listView.setItems(Main.IM.getAllCollection());
+//        CellController CC = new CellController();
+
         listView.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
             public ListCell<Item> call(ListView<Item> listView) {
-//                return new ListViewCell();
                 return new ItemCell();
+//                return new ListViewCell(CC);
             }
         });
     }
@@ -68,7 +74,7 @@ public class NavController implements Initializable {
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);
-//            listView.setItems(Main.IM.getAllStrings());
+//            listViewOLD.setItems(Main.IM.getAllStrings());
             listView.setItems(Main.IM.getAllCollection());
         } else {
             System.out.print("INVALID INPUT\n");
