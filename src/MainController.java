@@ -1,17 +1,9 @@
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.util.Callback;
 import ui.ItemCell;
-import ui.ListViewCell;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,9 +12,8 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ResourceBundle;
-import java.util.Set;
 
-public class Controller implements Initializable {
+public class MainController implements Initializable {
     @FXML
     private TextField fieldASIN;
 
@@ -35,9 +26,9 @@ public class Controller implements Initializable {
     @FXML
     private ListView<String> listView;
 
-    public Controller()
+    public MainController()
     {
-        System.out.printf("Starting Controller\n");
+        System.out.printf("Starting MainController\n");
     }
 
     @FXML
@@ -79,8 +70,8 @@ public class Controller implements Initializable {
 
         listView.setCellFactory(new Callback<ListView<String>, javafx.scene.control.ListCell<String>>() {
             public ListCell<String> call(ListView<String> listView) {
-                return new ListViewCell();
-//                return new ItemCell();
+//                return new ListViewCell();
+                return new ItemCell();
             }
         });
     }
