@@ -1,12 +1,8 @@
 package Controller;
 
 import Model.Item;
-import View.ItemCell;
 import View.fxmlCell.ListViewCell;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,12 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
-import java.io.IOException;
 import java.net.URL;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -58,37 +49,32 @@ public class NavController implements Initializable {
         assert amazonField != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainView.fxml'.";
 
-        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
+        listView.setOnMouseClicked(event -> {
+            if (listView.getSelectionModel().isEmpty()) {
+                System.out.println("No listview item selected");
+            } else {
                 String ASIN = listView.getSelectionModel().getSelectedItem().itemID;
                 System.out.println("Item clicked: " + ASIN);
                 amazonField.setText(ASIN);
             }
         });
 
-        navEvent = new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                Parent p = (Parent) event.getSource();
+        navEvent = event -> {
+            Parent p = (Parent) event.getSource();
 
-                String ASIN = p.getId();
+            String ASIN = p.getId();
 
-                System.out.println("Delete button clicked: " + ASIN);
+            System.out.println("Delete button clicked: " + ASIN);
 //                event.consume();
-                amazonField.setText(ASIN);
+            amazonField.setText(ASIN);
 
-                Main.IM.remove(p.getId());
-                updateListView();
-            }
+            Main.IM.remove(p.getId());
+            updateListView();
         };
 
-        amazonField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER)  {
-                    getItem();
-                }
+        amazonField.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ENTER)  {
+                getItem();
             }
         });
 
@@ -96,18 +82,13 @@ public class NavController implements Initializable {
 //        updateListView();
 //        CellController CC = new CellController();
 
-        listView.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
-            public ListCell<Item> call(ListView<Item> listView) {
+        listView.setCellFactory(listView1 -> {
 //                return new ItemCell(navEvent);
-                return new ListViewCell(navEvent);
-            }
+            return new ListViewCell(navEvent);
         });
 
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-//                amazonField.requestFocus();
-            }
+        Platform.runLater(() -> {
+            amazonField.requestFocus();
         });
     }
 
@@ -121,10 +102,8 @@ public class NavController implements Initializable {
     }
 
     @FXML
-    public void debugFunc() {
-        System.out.println("DEBUG button pressed");
-//        updateListView();
-        refresh();
+    public void selectAll() {
+        amazonField.selectAll();
     }
 
     @FXML
@@ -135,7 +114,6 @@ public class NavController implements Initializable {
         String input = amazonField.getText();     //Test value: "B00NMJJXU4"
         String ASIN = input;
 
-
         /**
          * REGEX TESTERS:
          * https://regex101.com/
@@ -145,14 +123,12 @@ public class NavController implements Initializable {
          * REGEX TEST: http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)
          */
 
-        String regex="http:\\/\\/(?:www\\.|)amazon\\.com\\/(?:gp\\/product|[^\\/]+\\/dp|dp)\\/([^\\/]+)";
+        String regex=".*?amazon\\.com\\/(?:gp\\/product|[^\\/]+\\/dp|dp)\\/([^\\/]+)";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
             ASIN = matcher.group(1);
-        } else {
-//            System.out.println("NO AMAZON URL MATCH FOUND FOR:  " + input);
         }
 
         /**

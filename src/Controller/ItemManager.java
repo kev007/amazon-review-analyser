@@ -21,7 +21,7 @@ public class ItemManager {
      * <key, value> where the key is the ASIN and trhe value is the Item object
      */
     public HashMap<String, Item> localItems;
-    int thread;
+    public int thread;
 
     /**
      * ItemManager constructor
@@ -31,7 +31,7 @@ public class ItemManager {
     public ItemManager() {
         System.out.println("Starting ItemManager");
 
-        localItems = new HashMap();
+        localItems = new HashMap<String, Item>();
         thread = 0;
     }
 
@@ -80,12 +80,11 @@ public class ItemManager {
     public void printLocal() {
         int total = 0;
         Set set = localItems.entrySet();
-        Iterator iterator = set.iterator();
-        while(iterator.hasNext()) {
+        for (Object aSet : set) {
             total++;
-            Map.Entry mentry = (Map.Entry)iterator.next();
-            System.out.print(total + ". "+ mentry.getKey() + " - ");
-            System.out.println(mentry.getValue());
+            Map.Entry entry = (Map.Entry) aSet;
+            System.out.print(total + ". " + entry.getKey() + " - ");
+            System.out.println(entry.getValue());
         }
 
         System.out.println("total items: " + total);
@@ -111,10 +110,9 @@ public class ItemManager {
     public ObservableList getAllStrings() {
         ObservableList data = FXCollections.observableArrayList();
 
-        Iterator iterator = localItems.entrySet().iterator();
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();
-            data.add(mentry.getKey().toString());
+        for (Object o : localItems.entrySet()) {
+            Map.Entry entry = (Map.Entry) o;
+            data.add(entry.getKey().toString());
         }
         return data;
     }
@@ -126,10 +124,9 @@ public class ItemManager {
     public ObservableList getAllCollection() {
         ObservableList data = FXCollections.observableArrayList();
 
-        Iterator iterator = localItems.entrySet().iterator();
-        while(iterator.hasNext()) {
-            Map.Entry mentry = (Map.Entry)iterator.next();
-            data.add(mentry.getValue());
+        for (Object o : localItems.entrySet()) {
+            Map.Entry entry = (Map.Entry) o;
+            data.add(entry.getValue());
         }
         return data;
     }
