@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Item;
 import View.ItemCell;
+import View.fxmlCell.ListViewCell;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -91,14 +92,14 @@ public class NavController implements Initializable {
             }
         });
 
-//        Main.IM.get("B00NMJJXU4");
+//        Main.IM.get("B0143UM4TC");
 //        updateListView();
 //        CellController CC = new CellController();
 
         listView.setCellFactory(new Callback<ListView<Item>, ListCell<Item>>() {
             public ListCell<Item> call(ListView<Item> listView) {
-                return new ItemCell(navEvent);
-//                return new ListViewCell(CC);
+//                return new ItemCell(navEvent);
+                return new ListViewCell(navEvent);
             }
         });
 
@@ -112,7 +113,7 @@ public class NavController implements Initializable {
 
     public void updateListView() {
         listView.setItems(Main.IM.getAllCollection());
-        listView.refresh();
+//        listView.refresh();
     }
 
     public void refresh() {

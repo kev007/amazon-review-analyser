@@ -30,10 +30,8 @@ public class Main extends Application {
         root = FXMLLoader.load(getClass().getResource("/View/MainView.fxml"));
         scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setWidth(1200);
-        primaryStage.setHeight(600);
         primaryStage.setTitle("Amazon Review Analyser");
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 

@@ -11,14 +11,14 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NavController">
    <center>
-      <ListView fx:id="listView" focusTraversable="false" BorderPane.alignment="TOP_CENTER">
+      <ListView fx:id="listView" focusTraversable="false">
          <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" />
+            <Insets bottom="5.0" />
          </BorderPane.margin>
       </ListView>
    </center>
    <top>
-      <BorderPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <BorderPane minWidth="200.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <left>
             <!--<Button fx:id="debug" mnemonicParsing="false" onAction="#debugFunc" prefHeight="30.0" text="[Debug] Refresh" BorderPane.alignment="CENTER">-->
                <!--<BorderPane.margin>-->

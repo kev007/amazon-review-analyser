@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="600.0" minWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
     <children>
         <MenuBar prefHeight="27.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -26,6 +26,7 @@
                 <Menu mnemonicParsing="false" text="Debug">
                     <items>
                         <MenuItem fx:id="menuPrintLocal" mnemonicParsing="false" onAction="#debugPrintLocal" text="Print Local Items" />
+                  <MenuItem fx:id="menuAddItems" mnemonicParsing="false" onAction="#debugAddItems" text="Add Items" />
                     </items>
                 </Menu>
             </menus>
@@ -37,9 +38,9 @@
                         <fx:include fx:id="NavView" source="NavView.fxml" />
                     </children>
                 </StackPane>
-                <StackPane minWidth="350.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                <StackPane minWidth="150.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
                     <children>
-                        <fx:include fx:id="embeddedRedView" source="DetailsView.fxml" />
+                        <fx:include fx:id="DetailsView" source="DetailsView.fxml" />
                     </children>
                 </StackPane>
             </items>

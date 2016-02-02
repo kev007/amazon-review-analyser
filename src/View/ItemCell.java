@@ -20,8 +20,8 @@ import javafx.scene.layout.Priority;
  */
 public class ItemCell extends ListCell<Item> {
     EventHandler navEvent;
-    ItemCell cell;
-    Item item;
+//    ItemCell cell;
+//    Item item;
     HBox hbox = new HBox();
     Label labelID = new Label("(ID)");
     Label labelName = new Label("(Name)");
@@ -38,7 +38,7 @@ public class ItemCell extends ListCell<Item> {
     public ItemCell(EventHandler navEvent) {
         super();
         this.navEvent = navEvent;
-        cell = this;
+//        cell = this;
         progress.setText("Starting");
         percent.setText("0%");
 
@@ -63,7 +63,7 @@ public class ItemCell extends ListCell<Item> {
 
     public void updateItem(Item item, boolean empty) {
         super.updateItem(item, empty);
-        this.item = item;
+//        this.item = item;
         setText(null);  // No text in label of super class
 
         if (empty) {

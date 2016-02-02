@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.fxmlCell.CellController">
-   <right>
-      <Button fx:id="delButton" mnemonicParsing="false" onAction="#delItem" prefHeight="30.0" text="Delete" BorderPane.alignment="CENTER" />
-   </right>
-   <center>
-      <Label fx:id="labelID" prefHeight="17.0" prefWidth="425.0" text="Label" BorderPane.alignment="CENTER" />
-   </center>
-</BorderPane>
+<HBox fx:id="hbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="38.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="progress" alignment="CENTER" prefWidth="45.0" text="Starting" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets left="-10.0" />
+         </padding></Label>
+      <ProgressBar fx:id="pb" maxWidth="150.0" minWidth="30.0" prefHeight="20.0" prefWidth="70.0" progress="0.0" HBox.hgrow="ALWAYS" />
+      <Label fx:id="percent" alignment="CENTER" prefWidth="40.0" text="0%" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding></Label>
+      <Label fx:id="labelID" prefWidth="80.0" text="(ID)" />
+      <Label fx:id="labelName" maxWidth="1000.0" minWidth="50.0" prefWidth="100.0" text="(Name)" HBox.hgrow="ALWAYS">
+         <padding>
+            <Insets left="5.0" />
+         </padding></Label>
+      <Button fx:id="button" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" text="Delete" BorderPane.alignment="CENTER" HBox.hgrow="NEVER" />
+   </children>
+</HBox>

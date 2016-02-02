@@ -23,45 +23,41 @@ import java.io.IOException;
  * http://stackoverflow.com/a/23126356
  */
 public class ListViewCell extends ListCell<Item> {
-    Item item;
     CellController CC;
-    private Parent itemRoot;
 
-    @FXML
-    public Button delButton;
-
-    @FXML
-    public Label labelID;
-
-    @FXML
-    public BorderPane borderPane;
-
-    public ListViewCell(CellController CC) {
+    public ListViewCell(EventHandler navEvent) {
         super();
 
-        this.CC = CC;
+        this.CC = new CellController(navEvent);
     }
 
     @Override
-    public void updateItem(Item item, boolean remove) {
-        this.item = item;
-        super.updateItem(item, remove);
+    public void updateItem(Item item, boolean empty) {
+        super.updateItem(item, empty);
+//        this.item = item;
 
-        if (remove) {
+        if (empty) {
             setGraphic(null);
         } else {
-            try {
-                itemRoot = FXMLLoader.load(getClass().getResource(("ListViewCell.fxml")));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            CC.labelID.setText(item!=null ? " " + item.itemID + " " : "<null>");
+            CC.labelName.setText(item!=null ? item.itemName : "<null>");
+//            System.out.println("ID: " + item.itemID);
+            CC.button.setId(item.itemID);
+            if (item.progress <= 0) {
+                if (item.progress < 0) {
+                    CC.progress.setText("ERROR");
+                }
+            } else {
+                CC.progress.setText(item.progress + "/" + item.total);
+                CC.percent.setText(item.progress*100/item.total + "%");
             }
-            System.out.println("!!!! ITEM; " + item.itemID);
-            labelID.setText(item!=null ? item.itemID + " " : "<null>");
-            setGraphic(borderPane);
+            CC.pb.setProgress((double) item.progress/item.total);
+
+            setGraphic(CC.hbox);
         }
     }
 
-///    @Override
+//    @Override
 //    protected void updateItem(AppBean app, boolean empty) {
 //        super.updateItem(app, empty);
 //        if (app == null) {

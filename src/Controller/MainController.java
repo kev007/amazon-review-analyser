@@ -12,6 +12,9 @@ public class MainController implements Initializable {
     @FXML
     private MenuItem menuPrintLocal;
 
+    @FXML
+    private MenuItem menuAddItems;
+
     public static NavController NC;
 
     public MainController() {
@@ -32,6 +35,16 @@ public class MainController implements Initializable {
     @FXML
     public void debugPrintLocal(ActionEvent event) {
         Main.IM.printLocal();
+    }
+
+    @FXML
+    public void debugAddItems(ActionEvent event) {
+        Main.IM.get("B00A378L4C");
+        Main.IM.get("B0143UM4TC");
+        Main.IM.get("B01606IDL0");
+        Main.IM.get("B0163GS05Q");
+
+        NC.updateListView();
     }
 
     @FXML
