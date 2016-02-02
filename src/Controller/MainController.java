@@ -1,21 +1,31 @@
 package Controller;
 
+import Model.Item;
+import View.ListView.DetailsCell;
+import View.ListView.NavListCell;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    public static NavController NC;
+    public EventHandler navEvent;
+
     @FXML
     private MenuItem menuPrintLocal;
 
     @FXML
     private MenuItem menuAddItems;
 
-    public static NavController NC;
+    @FXML
+    public ListView<Item> detailsList;
 
     public MainController() {
         System.out.printf("Starting MainController\n");
@@ -49,5 +59,14 @@ public class MainController implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
+        navEvent = event -> {
+            Parent p = (Parent) event.getSource();
+
+            String ASIN = p.getId();
+
+            System.out.println("Details clicked: " + ASIN);
+        };
+
+        detailsList.setCellFactory(navList1 -> new DetailsCell(navEvent, "DetailsCell.fxml"));
     }
 }

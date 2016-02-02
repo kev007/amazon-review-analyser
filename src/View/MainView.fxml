@@ -39,9 +39,10 @@
                     </children>
                 </StackPane>
                 <StackPane minWidth="150.0" prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER">
-                    <children>
-                        <fx:include fx:id="DetailsView" source="DetailsView.fxml" />
-                    </children>
+                   <children>
+                       <ListView fx:id="detailsList" focusTraversable="false" orientation="HORIZONTAL">
+                    </ListView>
+                   </children>
                 </StackPane>
             </items>
         </SplitPane>

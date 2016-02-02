@@ -1,21 +1,18 @@
 package Controller;
 
 import Model.Item;
-import View.fxmlCell.ListViewCell;
+import View.ListView.NavListCell;
 import javafx.application.Platform;
-import javafx.event.Event;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,13 +26,14 @@ import java.util.regex.Pattern;
  */
 public class NavController implements Initializable {
     public EventHandler navEvent;
+    public ObservableList<Item> detailsData;
 
     @FXML
     private TextField amazonField;
     @FXML
     private Button getButton;
     @FXML
-    public ListView<Item> listView;
+    public ListView<Item> navList;
 
     public NavController() {
         System.out.printf("Starting NavController\n");
@@ -49,13 +47,17 @@ public class NavController implements Initializable {
         assert amazonField != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainView.fxml'.";
 
-        listView.setOnMouseClicked(event -> {
-            if (listView.getSelectionModel().isEmpty()) {
+        detailsData = FXCollections.observableArrayList();
+
+        navList.setOnMouseClicked(event -> {
+            if (navList.getSelectionModel().isEmpty()) {
                 System.out.println("No listview item selected");
             } else {
-                String ASIN = listView.getSelectionModel().getSelectedItem().itemID;
+                String ASIN = navList.getSelectionModel().getSelectedItem().itemID;
                 System.out.println("Item clicked: " + ASIN);
                 amazonField.setText(ASIN);
+
+                detailsData.add(Main.IM.getItem(ASIN));
             }
         });
 
@@ -82,10 +84,8 @@ public class NavController implements Initializable {
 //        updateListView();
 //        CellController CC = new CellController();
 
-        listView.setCellFactory(listView1 -> {
-//                return new ItemCell(navEvent);
-            return new ListViewCell(navEvent);
-        });
+        navList.setCellFactory(navList1 -> new NavListCell(navEvent, "NavListCell.fxml"));
+//        navList.setCellFactory(navList1 -> new ItemCell(navEvent));
 
         Platform.runLater(() -> {
             amazonField.requestFocus();
@@ -93,12 +93,14 @@ public class NavController implements Initializable {
     }
 
     public void updateListView() {
-        listView.setItems(Main.IM.getAllCollection());
-//        listView.refresh();
+        navList.setItems(Main.IM.getAllCollection());
+//        navList.refresh();
     }
 
     public void refresh() {
-        listView.refresh();
+        navList.refresh();
+        Main.MC.detailsList.refresh();
+        Main.MC.detailsList.setItems(detailsData);
     }
 
     @FXML
@@ -134,7 +136,7 @@ public class NavController implements Initializable {
         /**
          * Basic input check
          * Execute crawl command
-         * get all ASIN and give them too the listView for the GUI
+         * get all ASIN and give them too the navList for the GUI
          */
         if (ASIN.length() == 10) {
             Main.IM.get(ASIN);

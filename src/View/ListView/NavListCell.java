@@ -1,20 +1,8 @@
-package View.fxmlCell;
+package View.ListView;
 
-import Controller.Main;
 import Model.Item;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-
-import java.io.IOException;
 
 /**
  * Created by kev_s on 30.01.2016.
@@ -22,13 +10,13 @@ import java.io.IOException;
  * http://stackoverflow.com/questions/19588029/customize-listview-in-javafx-with-fxml
  * http://stackoverflow.com/a/23126356
  */
-public class ListViewCell extends ListCell<Item> {
+public class NavListCell extends ListCell<Item> {
     CellController CC;
 
-    public ListViewCell(EventHandler navEvent) {
+    public NavListCell(EventHandler navEvent, String FXML) {
         super();
 
-        this.CC = new CellController(navEvent);
+        this.CC = new CellController(navEvent, FXML);
     }
 
     @Override

@@ -49,6 +49,14 @@ public class ItemManager {
     }
 
     /**
+     * returns Item for specified ASIN
+     * @param ASIN
+     */
+    public Item getItem(String ASIN) {
+        return localItems.get(ASIN);
+    }
+
+    /**
      * return localItems for corresponding ASIN, crawl and return if not locally available
      * @param ASIN
      */
