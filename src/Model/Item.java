@@ -49,7 +49,7 @@ public class Item {
         String url = "http://www.amazon.com/product-reviews/" + itemID
                 + "/?showViewpoints=0&sortBy=byRankDescending&pageNumber=" + 1;
 
-        int maxAttempts = 5;
+        int maxAttempts = 10;
 
         while (!crawlSuccess && crawlAttempt <=  maxAttempts) {
             crawlAttempt++;
