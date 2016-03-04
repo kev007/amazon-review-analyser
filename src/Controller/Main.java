@@ -36,11 +36,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-//        debug();
         DBM = new DBManager("test.db");
         DBM.start();
         IM = new ItemManager();
         launch(args);
+
+        //debug();
     }
 
     public static void debug() {

@@ -49,7 +49,7 @@ public class Item {
         String url = "http://www.amazon.com/product-reviews/" + itemID
                 + "/?showViewpoints=0&sortBy=byRankDescending&pageNumber=" + 1;
 
-        int maxAttempts = 10;
+        int maxAttempts = 2;
         int timeout = 1000;
 
         while (!crawlSuccess && crawlAttempt < maxAttempts) {
@@ -61,7 +61,11 @@ public class Item {
             try {
                 // Get the max number of review pages;
                 org.jsoup.nodes.Document reviewpage1 = null;
-                reviewpage1 = Jsoup.connect(url).timeout(timeout).get();
+                reviewpage1 = Jsoup.connect(url)
+                        .timeout(timeout)
+                        .followRedirects(true)
+                        .userAgent("Mozilla/17.0")
+                        .get();
                 int maxpage = 1;
                 Elements pagelinks = reviewpage1.select("a[href*=pageNumber=]");
                 if (pagelinks.size() != 0) {
@@ -86,7 +90,11 @@ public class Item {
                             + "/?sortBy=helpful&pageNumber="
                             + p;
                     org.jsoup.nodes.Document reviewpage = null;
-                    reviewpage = Jsoup.connect(url).timeout(timeout).get();
+                    reviewpage = Jsoup.connect(url)
+                            .timeout(timeout)
+                            .followRedirects(true)
+                            .userAgent("Mozilla/17.0")
+                            .get();
                     if (reviewpage.select("div.a-section.review").isEmpty()) {
                         System.out.println(itemID + " " + "no review");
                     } else {
@@ -104,6 +112,7 @@ public class Item {
                 crawlSuccess = true;
             } catch (Exception e) {
                 System.out.println(itemID + " " + "Exception " + e.getClass() + " \t " + e.getMessage());
+                e.printStackTrace();
             }
         }
         if (!crawlSuccess) progress = -1;
