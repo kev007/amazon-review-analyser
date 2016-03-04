@@ -39,13 +39,7 @@ public class ItemManager {
     }
 
     public static void readDatabase() {
-        System.out.println(Main.DBM.getDBTables());
-        //TODO: finish
-//        for (:
-//             ) {
-//            add(ASIN);
-//        }
-
+        //System.out.println(Main.DBM.getDBTables());
         Main.DBM.getItems();
     }
 

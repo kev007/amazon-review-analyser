@@ -61,11 +61,12 @@ public class DBManager extends Thread {
                 tables += rs.getString("TABLE_NAME");
                 tables += "\n";
             }
+
+            conn.close();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
         return tables;
     }
 
@@ -89,14 +90,14 @@ public class DBManager extends Thread {
             while (rs.next()){
                 temp.put(rs.getString(1), rs.getString(2));
             }
+
+            conn.close();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-
         return temp;
     }
-
 
     /**
      * Getter Database Name
