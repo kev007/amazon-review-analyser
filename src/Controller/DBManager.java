@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Item;
 
+import java.sql.*;
 import java.util.LinkedList;
 
 /**
@@ -36,6 +37,33 @@ public class DBManager extends Thread {
         this.writeQueue = new LinkedList<Item>();
 
         System.out.println("Starting DBManager: " + this.dbName);
+    }
+
+    /**
+     * Getter Database Tables
+     *
+     * @return DB - Tables
+     */
+    public String getDBTables() {
+        String tables = "no tables!!!!!";
+        try {
+            Class.forName("org.sqlite.JDBC");
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbName);
+            DatabaseMetaData dbmd = conn.getMetaData();
+            String[] types = {"TABLE"};
+            ResultSet rs = dbmd.getTables(null, null, "%", types);
+            tables = "";
+            while (rs.next()) {
+                tables += rs.getString("TABLE_NAME");
+                tables += "\n";
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tables;
     }
 
     /**
@@ -90,4 +118,5 @@ public class DBManager extends Thread {
         }
     }
 
+    
 }

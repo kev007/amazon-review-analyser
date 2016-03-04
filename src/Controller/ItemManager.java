@@ -31,8 +31,33 @@ public class ItemManager {
     public ItemManager() {
         System.out.println("Starting ItemManager");
 
+        System.out.println("Reading from Database");
+        readDatabase();
+
         localItems = new HashMap<String, Item>();
         thread = 0;
+    }
+
+    public static void readDatabase() {
+        System.out.println(Main.DBM.getDBTables());
+        //TODO: finish
+//        for (:
+//             ) {
+//            add(ASIN);
+//        }
+    }
+
+    /**
+     * adds empty Item to localItems
+     * @param ASIN
+     */
+    public void add(String ASIN) {
+        if (localItems.containsKey(ASIN)) {
+            System.out.println(ASIN + " found locally in localItems: " + localItems.get(ASIN).itemID);
+        } else {
+            System.out.println("adding " + ASIN);
+            //TODO: fill items
+        }
     }
 
     /**

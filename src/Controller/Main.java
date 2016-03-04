@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.ParseException;
 import java.io.IOException;
 import java.util.regex.Matcher;
@@ -36,15 +36,25 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        startup();      //start logic
+
+        launch(args);   //start interface
+
+//        debug();
+//        debug2();
+    }
+
+    public static void startup() {
         DBM = new DBManager("test.db");
         DBM.start();
         IM = new ItemManager();
-        launch(args);
-
-        //debug();
     }
 
     public static void debug() {
+
+    }
+
+    public static void debug2() {
         String ASIN = "amazon.com/CM-Storm-QuickFire-TK-Mechanical/dp/B00A378L4C/ref=pd_sim_147_2?ie=UTF8&dpID=31wokVpI8eL&dpSrc=sims&preST=_AC_UL160_SR160%2C160_&refRID=1C10ZYGJTRPXCSBW90PM";
 
         String regex=".*?amazon\\.com\\/(?:gp\\/product|[^\\/]+\\/dp|dp)\\/([^\\/]+)";

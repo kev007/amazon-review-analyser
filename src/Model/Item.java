@@ -28,14 +28,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Item {
+    public String itemID;
+    public String itemName = "Unknown";
+    public ArrayList<Review> reviews;
+    public int total = 1;
+    public int progress = 0;
+    public int crawlAttempt = 0;
+    public boolean crawlSuccess = false;
+
     public Item(String theitemid) {
-        itemID = theitemid;
-        itemName = "Unknown";
-        progress = 0;
-        total = 1;
+        this.itemID = theitemid;
         reviews = new ArrayList<Review>();
-        crawlAttempt = 0;
-        crawlSuccess = false;
+    }
+
+    public Item(String theitemid, String itemName) {
+        this.itemID = theitemid;
+        this.itemName = itemName;
+        crawlSuccess = true;
     }
 
     public void addReview(Review thereview) {
@@ -112,7 +121,7 @@ public class Item {
                 crawlSuccess = true;
             } catch (Exception e) {
                 System.out.println(itemID + " " + "Exception " + e.getClass() + " \t " + e.getMessage());
-                e.printStackTrace();
+//                e.printStackTrace();
             }
         }
         if (!crawlSuccess) progress = -1;
@@ -359,12 +368,4 @@ public class Item {
         }
         return InfoTagMap;
     }
-
-    public String itemID;
-    public String itemName;
-    public ArrayList<Review> reviews;
-    public int total = 1;
-    public int progress = 0;
-    public int crawlAttempt = 0;
-    public boolean crawlSuccess;
 }
