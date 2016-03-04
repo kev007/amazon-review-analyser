@@ -58,6 +58,14 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    public void readDB(ActionEvent event) {
+        Main.IM.readDatabase();
+//        Main.IM.add("0000000123", "TEST ITEM 123");
+
+        NC.updateListView();
+    }
+
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
         navEvent = event -> {
             Parent p = (Parent) event.getSource();

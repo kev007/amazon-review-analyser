@@ -4,10 +4,7 @@ import Model.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BooleanSupplier;
 
 /**
@@ -30,29 +27,42 @@ public class ItemManager {
      */
     public ItemManager() {
         System.out.println("Starting ItemManager");
+        localItems = new HashMap<String, Item>();
 
         System.out.println("Reading from Database");
         readDatabase();
 
-        localItems = new HashMap<String, Item>();
         thread = 0;
     }
 
-    public static void readDatabase() {
-        //System.out.println(Main.DBM.getDBTables());
-        Main.DBM.getItems();
+    public void readDatabase() {
+        String ASIN = "";
+        String Name = "";
+//        System.out.println(Main.DBM.getDBTables());
+
+        HashMap<String, String> dbItems = Main.DBM.getItems();
+//        HashMap<String, String> dbItems = new HashMap<String, String>();
+
+        Set set = dbItems.entrySet();
+        for (Object aSet : set) {
+            Map.Entry entry = (Map.Entry) aSet;
+            ASIN = entry.getKey().toString();
+            Name = entry.getValue().toString();
+
+            add(ASIN, Name);
+        }
     }
 
     /**
      * adds empty Item to localItems
      * @param ASIN
      */
-    public void add(String ASIN) {
+    public void add(String ASIN, String Name) {
         if (localItems.containsKey(ASIN)) {
             System.out.println(ASIN + " found locally in localItems: " + localItems.get(ASIN).itemID);
         } else {
             System.out.println("adding " + ASIN);
-            //TODO: fill items
+            localItems.put(ASIN, new Item(ASIN, Name));
         }
     }
 

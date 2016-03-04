@@ -51,7 +51,6 @@ public class DBManager extends Thread {
         String tables = "no tables!!!!!";
         try {
             Class.forName("org.sqlite.JDBC");
-
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbName);
             DatabaseMetaData dbmd = conn.getMetaData();
             String[] types = {"TABLE"};

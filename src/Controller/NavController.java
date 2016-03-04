@@ -89,6 +89,7 @@ public class NavController implements Initializable {
 
         Platform.runLater(() -> {
             amazonField.requestFocus();
+            updateListView();
         });
     }
 

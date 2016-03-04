@@ -5,7 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 
+import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -36,6 +40,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+//        try {
+//            Desktop.getDesktop().open(File.createTempFile("test", ".html", FileUtils.writeStringToFile());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
         startup();      //start logic
 
         launch(args);   //start interface

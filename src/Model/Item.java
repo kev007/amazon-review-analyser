@@ -13,8 +13,12 @@ import org.jsoup.select.Elements;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import javax.swing.text.html.HTML;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -37,14 +41,18 @@ public class Item {
     public boolean crawlSuccess = false;
 
     public Item(String theitemid) {
-        this.itemID = theitemid;
+        itemID = theitemid;
         reviews = new ArrayList<Review>();
     }
 
-    public Item(String theitemid, String itemName) {
-        this.itemID = theitemid;
-        this.itemName = itemName;
+    public Item(String theitemid, String name) {
+        itemID = theitemid;
+        itemName = name;
         crawlSuccess = true;
+        total = 1;
+        progress = 1;
+        crawlAttempt = 0;
+        reviews = new ArrayList<Review>();
     }
 
     public void addReview(Review thereview) {
@@ -58,7 +66,7 @@ public class Item {
         String url = "http://www.amazon.com/product-reviews/" + itemID
                 + "/?showViewpoints=0&sortBy=byRankDescending&pageNumber=" + 1;
 
-        int maxAttempts = 2;
+        int maxAttempts = 200;
         int timeout = 1000;
 
         while (!crawlSuccess && crawlAttempt < maxAttempts) {
@@ -77,6 +85,9 @@ public class Item {
                         .get();
                 int maxpage = 1;
                 Elements pagelinks = reviewpage1.select("a[href*=pageNumber=]");
+                if (reviewpage1.select("a[href*=pageNumber=]").isEmpty()) {
+                    throw new Exception("THIS SHIT'S EMPTY, YO!");
+                }
                 if (pagelinks.size() != 0) {
                     ArrayList<Integer> pagenum = new ArrayList<Integer>();
                     for (Element link : pagelinks) {
@@ -93,7 +104,7 @@ public class Item {
                 total = maxpage;
 
                 // collect review from each of the review pages;
-                for (int p = progress; p <= maxpage; p = p + 1) {
+                for (int p = progress; p <= maxpage; p++) {
                     url = "http://www.amazon.com/product-reviews/"
                             + itemID
                             + "/?sortBy=helpful&pageNumber="
@@ -105,7 +116,10 @@ public class Item {
                             .userAgent("Mozilla/17.0")
                             .get();
                     if (reviewpage.select("div.a-section.review").isEmpty()) {
-                        System.out.println(itemID + " " + "no review");
+                        System.out.println(itemID + " " + "no review " + p);
+//                        System.out.println(reviewpage);
+//                        Desktop.getDesktop().open(new File("test"));
+                        throw new Exception("THIS SHIT'S EMPTY, YO!");
                     } else {
                         Elements reviewsHTMLs = reviewpage.select(
                                 "div.a-section.review");
@@ -114,7 +128,7 @@ public class Item {
                             this.addReview(theReview);
                         }
                     }
-                    //TODO: event - progress
+
                     progress = p;
                     Main.MC.refresh();
                 }
@@ -122,6 +136,12 @@ public class Item {
             } catch (Exception e) {
                 System.out.println(itemID + " " + "Exception " + e.getClass() + " \t " + e.getMessage());
 //                e.printStackTrace();
+                try {
+                    System.out.println("Waiting for " + crawlAttempt + "min before trying again");
+                    Thread.sleep(60000*crawlAttempt);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
         }
         if (!crawlSuccess) progress = -1;

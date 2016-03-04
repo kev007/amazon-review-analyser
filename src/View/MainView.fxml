@@ -26,7 +26,8 @@
                 <Menu mnemonicParsing="false" text="Debug">
                     <items>
                         <MenuItem fx:id="menuPrintLocal" mnemonicParsing="false" onAction="#debugPrintLocal" text="Print Local Items" />
-                  <MenuItem fx:id="menuAddItems" mnemonicParsing="false" onAction="#debugAddItems" text="Add Items" />
+                        <MenuItem fx:id="menuAddItems" mnemonicParsing="false" onAction="#debugAddItems" text="Add Items" />
+                        <MenuItem fx:id="menuReadDB" mnemonicParsing="false" onAction="#readDB" text="Read Database" />
                     </items>
                 </Menu>
             </menus>
