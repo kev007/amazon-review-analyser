@@ -50,19 +50,18 @@ public class Item {
                 + "/?showViewpoints=0&sortBy=byRankDescending&pageNumber=" + 1;
 
         int maxAttempts = 10;
+        int timeout = 1000;
 
-        while (!crawlSuccess && crawlAttempt <=  maxAttempts) {
+        while (!crawlSuccess && crawlAttempt < maxAttempts) {
             crawlAttempt++;
 
-            if (!crawlSuccess && crawlAttempt > 1) {
-                System.out.println(itemID + " (" + progress + "/" + total + ") \t " + (char) 27 + "[36m" +
-                        " FAILED GET " + crawlAttempt + (char) 27 + "[0m" + " \t Trying again.");
-            }
+            System.out.println(itemID + " (" + progress + "/" + total + ") \t " + (char) 27 + "[36m" +
+                    " GET " + crawlAttempt + " OF " + maxAttempts + (char) 27 + "[0m" + " \t Trying.");
 
             try {
                 // Get the max number of review pages;
                 org.jsoup.nodes.Document reviewpage1 = null;
-                reviewpage1 = Jsoup.connect(url).timeout(10 * 1000).get();
+                reviewpage1 = Jsoup.connect(url).timeout(timeout).get();
                 int maxpage = 1;
                 Elements pagelinks = reviewpage1.select("a[href*=pageNumber=]");
                 if (pagelinks.size() != 0) {
@@ -87,7 +86,7 @@ public class Item {
                             + "/?sortBy=helpful&pageNumber="
                             + p;
                     org.jsoup.nodes.Document reviewpage = null;
-                    reviewpage = Jsoup.connect(url).timeout(10 * 1000).get();
+                    reviewpage = Jsoup.connect(url).timeout(timeout).get();
                     if (reviewpage.select("div.a-section.review").isEmpty()) {
                         System.out.println(itemID + " " + "no review");
                     } else {
@@ -113,7 +112,7 @@ public class Item {
 
     /**
      * cleans the html block that contains a review
-     * 
+     *
      * @param reviewBlock
      *            a html review block (Jsoup Element)
      * @return
@@ -163,7 +162,7 @@ public class Item {
         rating = Integer.parseInt(starinfo.substring(0, 1));
 
         // usefulness voting
-        Elements votes = reviewBlock.select("span.review-votes");
+        Elements votes = reviewBlock.select("span.votingStripe");
         if (votes.size() > 0) {
             String votingtext = votes.first().text();
             Pattern pattern2 = Pattern.compile("(\\S+)( of )(\\S+)");
@@ -199,7 +198,7 @@ public class Item {
 
     /**
      * Write all reviews into a Sqlite database
-     * 
+     *
      * @param database
      *            Sqlite database file path
      * @param API
@@ -258,7 +257,7 @@ public class Item {
 
     /**
      * Sign the REST request
-     * 
+     *
      * @return REST request to acquire a "Large ResponseGroup" from ItemLookup
      *         operation in Amazon Advertising API
      * @throws InvalidKeyException
@@ -285,7 +284,7 @@ public class Item {
     /**
      * Get and print item info using Amazon's Product Advertising API. NOT
      * COMPLETE
-     * 
+     *
      * @throws InvalidKeyException
      * @throws NoSuchAlgorithmException
      * @throws UnsupportedEncodingException
@@ -315,7 +314,7 @@ public class Item {
 
     /**
      * Fetch the results of product info requested and return a Hashmap
-     * 
+     *
      * @param requestUrl
      *            Signed REST request url
      * @param TagNames
@@ -325,7 +324,7 @@ public class Item {
      * @return Map(Tag Name, Value)
      */
     private static Map<String, String> fetchInfo(String requestUrl,
-            ArrayList<String> TagNames) {
+                                                 ArrayList<String> TagNames) {
         Map<String, String> InfoTagMap = new HashMap<String, String>();
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
