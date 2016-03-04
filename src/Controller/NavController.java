@@ -57,7 +57,8 @@ public class NavController implements Initializable {
                 System.out.println("Item clicked: " + ASIN);
                 amazonField.setText(ASIN);
 
-                //detailsData.add(Main.IM.getItem(ASIN));
+                detailsData.add(Main.IM.getItem(ASIN));
+                refresh();
             }
         });
 

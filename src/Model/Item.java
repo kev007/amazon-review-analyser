@@ -1,6 +1,7 @@
 package Model;
 
 import Controller.Main;
+import org.apache.commons.io.FileUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -66,7 +67,7 @@ public class Item {
         String url = "http://www.amazon.com/product-reviews/" + itemID
                 + "/?showViewpoints=0&sortBy=byRankDescending&pageNumber=" + 1;
 
-        int maxAttempts = 200;
+        int maxAttempts = 1;
         int timeout = 1000;
 
         while (!crawlSuccess && crawlAttempt < maxAttempts) {
@@ -86,6 +87,11 @@ public class Item {
                 int maxpage = 1;
                 Elements pagelinks = reviewpage1.select("a[href*=pageNumber=]");
                 if (reviewpage1.select("a[href*=pageNumber=]").isEmpty()) {
+
+                    File errorHTML = new File("error.html");
+                    FileUtils.writeStringToFile(errorHTML, reviewpage1.toString());
+                    Desktop.getDesktop().open(errorHTML);
+
                     throw new Exception("THIS SHIT'S EMPTY, YO!");
                 }
                 if (pagelinks.size() != 0) {
@@ -117,8 +123,11 @@ public class Item {
                             .get();
                     if (reviewpage.select("div.a-section.review").isEmpty()) {
                         System.out.println(itemID + " " + "no review " + p);
-//                        System.out.println(reviewpage);
-//                        Desktop.getDesktop().open(new File("test"));
+
+                        File errorHTML = new File("error.html");
+                        FileUtils.writeStringToFile(errorHTML, reviewpage.toString());
+                        Desktop.getDesktop().open(errorHTML);
+
                         throw new Exception("THIS SHIT'S EMPTY, YO!");
                     } else {
                         Elements reviewsHTMLs = reviewpage.select(
@@ -136,12 +145,12 @@ public class Item {
             } catch (Exception e) {
                 System.out.println(itemID + " " + "Exception " + e.getClass() + " \t " + e.getMessage());
 //                e.printStackTrace();
-                try {
-                    System.out.println("Waiting for " + crawlAttempt + "min before trying again");
-                    Thread.sleep(60000*crawlAttempt);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
+//                try {
+//                    System.out.println("Waiting for " + crawlAttempt + "min before trying again");
+//                    Thread.sleep(60000*crawlAttempt);
+//                } catch (InterruptedException e1) {
+//                    e1.printStackTrace();
+//                }
             }
         }
         if (!crawlSuccess) progress = -1;

@@ -40,12 +40,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-//        try {
-//            Desktop.getDesktop().open(File.createTempFile("test", ".html", FileUtils.writeStringToFile());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         startup();      //start logic
 
         launch(args);   //start interface
