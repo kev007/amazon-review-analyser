@@ -248,6 +248,27 @@ public class Item {
     }
 
     /**
+     * Nicht vollständig
+     *
+     * @param database
+     * @param API
+     * @return
+     * @throws SQLException
+     */
+    public synchronized Item getItemFromDatabase(String database, boolean API) throws SQLException{
+        if (API == true){
+
+        }
+
+        else {
+
+        }
+
+
+        return this;
+    }
+
+    /**
      * @return the RAW XML document of ItemLookup (Large Response) from Amazon
      *         product advertisement API
      * @throws InvalidKeyException

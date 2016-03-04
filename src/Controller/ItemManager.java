@@ -45,6 +45,8 @@ public class ItemManager {
 //             ) {
 //            add(ASIN);
 //        }
+
+        Main.DBM.getItems();
     }
 
     /**

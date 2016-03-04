@@ -3,7 +3,10 @@ package Controller;
 import Model.Item;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Created by Fechler on 29.01.16.
@@ -67,6 +70,35 @@ public class DBManager extends Thread {
     }
 
     /**
+     * get all importend items
+     * (all items which include itemID and itemInfo)
+     *
+     * @return
+     */
+    public HashMap<String, String> getItems(){
+        HashMap<String, String> temp = new HashMap<String, String>();
+        try {
+            Class.forName("org.sqlite.JDBC");
+
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbName);
+            DatabaseMetaData dbmd = conn.getMetaData();
+
+            Statement s = conn.createStatement();
+            ResultSet rs = s.executeQuery("SELECT itemID, itemName FROM iteminfo;");
+
+            while (rs.next()){
+                temp.put(rs.getString(1), rs.getString(2));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return temp;
+    }
+
+
+    /**
      * Getter Database Name
      *
      * @return DB - Name
@@ -83,12 +115,22 @@ public class DBManager extends Thread {
     }
 
     /**
+     * Get Item by Name
+     */
+    /*
+    public Item getItems(String asinItem){
+        //SQLiteDatabase db = new SQLiteDatabase();
+
+    }*/
+
+    /**
      * A private Method to write
      * Items into SQL Lite DB
      */
     private void writeDB(){
         try {
             writeQueue.removeFirst().writeReviewsToDatabase(this.dbName, false);
+
         }
         catch (Exception e){
             e.printStackTrace();
