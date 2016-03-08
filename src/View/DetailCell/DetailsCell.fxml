@@ -40,21 +40,21 @@
                         <VBox>
                             <children>
                                 <!-- Item Ranking 1 -->
-                                <TextField fx:id="rating1" alignment="CENTER">
+                                <TextField fx:id="rating1" alignment="CENTER" text="5 Stars">
                                     <VBox.margin>
                                         <Insets left="5.0" right="5.0" top="5.0"/>
                                     </VBox.margin>
                                 </TextField>
                                 <!-- Item Ranking 2 -->
-                                <TextField fx:id="rating2" alignment="CENTER">
+                                <TextField fx:id="rating2" alignment="CENTER" text="5 Stars">
                                     <VBox.margin>
-                                        <Insets left="5.0" right="5.0" top="5.0"/>
+                                        <Insets left="5.0" right="5.0" top="25.0"/>
                                     </VBox.margin>
                                 </TextField>
                                 <!-- Item Comments -->
                                 <TextField fx:id="comments" editable="false" text="Comments">
                                     <VBox.margin>
-                                        <Insets left="5.0" right="5.0" top="5.0"/>
+                                        <Insets left="5.0" right="5.0" top="25.0"/>
                                     </VBox.margin>
                                 </TextField>
                             </children>
