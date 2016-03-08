@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<BorderPane fx:id="bp" prefHeight="400.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <!-- FX Head -->
+    <top>
+        <BorderPane prefHeight="70.0">
+            <center>
+                <Label fx:id="titleLabel" alignment="CENTER" text="Title"/>
+            </center>
+            <right>
+                <Button fx:id="closeButton" layoutX="250.0" text="Close"/>
+            </right>
+        </BorderPane>
+    </top>
+
+    <!-- FX Center -->
+    <center>
+        <ScrollPane prefHeight="150.0" prefWidth="320.0">
+            <content>
+
+                <BorderPane>
+                    <!-- ItemImage -->
+                    <left>
+                        <ImageView fx:id="urlImage" fitHeight="150.0" fitWidth="150.0">
+                            <BorderPane.margin>
+                                <Insets left="5.0" top="5.0"/>
+                            </BorderPane.margin>
+                        </ImageView>
+                    </left>
+
+                    <!-- Item Propertys -->
+                    <center>
+                        <VBox>
+                            <children>
+                                <!-- Item Ranking 1 -->
+                                <TextField fx:id="rating1" alignment="CENTER">
+                                    <VBox.margin>
+                                        <Insets left="5.0" right="5.0" top="5.0"/>
+                                    </VBox.margin>
+                                </TextField>
+                                <!-- Item Ranking 2 -->
+                                <TextField fx:id="rating2" alignment="CENTER">
+                                    <VBox.margin>
+                                        <Insets left="5.0" right="5.0" top="5.0"/>
+                                    </VBox.margin>
+                                </TextField>
+                                <!-- Item Comments -->
+                                <TextField fx:id="comments" editable="false" text="Comments">
+                                    <VBox.margin>
+                                        <Insets left="5.0" right="5.0" top="5.0"/>
+                                    </VBox.margin>
+                                </TextField>
+                            </children>
+                        </VBox>
+                    </center>
+                </BorderPane>
+            </content>
+
+        </ScrollPane>
+    </center>
+
+    <!-- FX Bottom -->
+    <bottom>
+        <ScrollPane prefHeight="120.0">
+            <content>
+                <VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </bottom>
+
+</BorderPane>

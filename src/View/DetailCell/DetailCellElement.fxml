@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane prefHeight="100.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+    <!-- Title Element-->
+    <top>
+        <Label fx:id="elementTitle" text="Title">
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding></Label>
+    </top>
+
+    <!-- origin Amazon Rating-->
+    <left>
+        <TextField fx:id="elementRatingAmazon" editable="false" text="pro">
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin></TextField>
+
+    </left>
+
+    <!-- Text Analyse Rating-->
+    <right>
+            <TextField fx:id="elementRatingAnalyse" editable="false" text="con">
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin></TextField>
+    </right>
+
+    <!-- Amazon Rating Comment-->
+    <bottom>
+        <TextField fx:id="elementComment" editable="false" text="Comment">
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin></TextField>
+    </bottom>
+
+</BorderPane>

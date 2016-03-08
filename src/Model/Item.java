@@ -82,10 +82,10 @@ public class Item {
                 reviewpage1 = Jsoup.connect(url)
                         .timeout(timeout)
                         .followRedirects(true)
-                        .userAgent("Mozilla/17.0")
                         .get();
                 int maxpage = 1;
                 Elements pagelinks = reviewpage1.select("a[href*=pageNumber=]");
+
                 if (reviewpage1.select("a[href*=pageNumber=]").isEmpty()) {
 
                     File errorHTML = new File("error.html");
@@ -94,6 +94,7 @@ public class Item {
 
                     throw new Exception("THIS SHIT'S EMPTY, YO!");
                 }
+
                 if (pagelinks.size() != 0) {
                     ArrayList<Integer> pagenum = new ArrayList<Integer>();
                     for (Element link : pagelinks) {
@@ -119,7 +120,6 @@ public class Item {
                     reviewpage = Jsoup.connect(url)
                             .timeout(timeout)
                             .followRedirects(true)
-                            .userAgent("Mozilla/17.0")
                             .get();
                     if (reviewpage.select("div.a-section.review").isEmpty()) {
                         System.out.println(itemID + " " + "no review " + p);
