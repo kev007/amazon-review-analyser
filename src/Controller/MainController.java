@@ -49,10 +49,10 @@ public class MainController implements Initializable {
 
     @FXML
     public void debugAddItems(ActionEvent event) {
-        Main.IM.get("B00A378L4C");
-        Main.IM.get("B0143UM4TC");
-        Main.IM.get("B01606IDL0");
-        Main.IM.get("B0163GS05Q");
+        Main.IM.get("B00A378L4C", "", false);
+        Main.IM.get("B0143UM4TC", "", false);
+        Main.IM.get("B01606IDL0", "", false);
+        Main.IM.get("B0163GS05Q", "", false);
 
         NC.updateListView();
     }

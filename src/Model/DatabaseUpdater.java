@@ -47,68 +47,41 @@ public class DatabaseUpdater {
 
 			// if database not exist
 			if (!(new File(database).isFile())) {
-				Statement stmt = null;
-				try {
-					Connection conn = DriverManager
-							.getConnection("jdbc:sqlite:" + database);
-					stmt = conn.createStatement();
-					String sql = "CREATE TABLE reviewinfo ( [KEY] INTEGER PRIMARY KEY, addedDate TEXT, reviewDate TEXT, realName TEXT, verifiedPurchase TEXT, totalVotes NUMERIC, helpfulVotes NUMERIC, fullRating NUMERIC, rating NUMERIC, title TEXT, customerID TEXT, customerName TEXT, reviewID TEXT UNIQUE ON CONFLICT REPLACE, itemID TEXT );";
-					stmt.executeUpdate(sql);
-					sql = "CREATE TABLE iteminfo ( id INTEGER PRIMARY KEY AUTOINCREMENT, itemID TEXT UNIQUE ON CONFLICT IGNORE, itemName TEXT, itemXMLInfo TEXT );";
-					stmt.executeUpdate(sql);
-					sql = "CREATE TABLE review ( [KEY] INTEGER PRIMARY KEY, reviewid TEXT UNIQUE ON CONFLICT REPLACE, title TEXT, content TEXT );";
-					stmt.executeUpdate(sql);
-					sql = "CREATE INDEX idx_reviewinfo ON reviewinfo ( reviewID );";
-					stmt.executeUpdate(sql);
-					stmt.close();
-					conn.close();
-				} catch (Exception e) {
-					System.err.println(e.getClass().getName() + ": "
-							+ e.getMessage());
-					System.exit(0);
-				}
-				System.out.println("Table created successfully");
+				createDB(database);
 			}
 
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:"
 					+ database);
 			PreparedStatement insertreview = conn
-					.prepareStatement("insert into review (reviewid, title, content) values (?1, ?2, ?3);");
-			PreparedStatement insertreviewinfo = conn
-					.prepareStatement("insert into reviewinfo (addedDate, reviewDate, realName, verifiedPurchase, totalVotes, "
-							+ "helpfulVotes, fullRating, rating, title, customerID, customerName, reviewID, itemID) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13);");
+					.prepareStatement("insert into review (addedDate, reviewDate, realName, verifiedPurchase, totalVotes, "
+							+ "helpfulVotes, fullRating, rating, title, customerID, customerName, reviewID, itemID, content) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14);");
 			for (Review areview : reviews) {
-				insertreview.setString(1, areview.reviewID);
-				insertreview.setString(2, areview.title);
-				insertreview.setString(3, areview.content);
-				insertreview.addBatch();
-
 				DateFormat dateFormat = new SimpleDateFormat(
 						"yyyy/MM/dd HH:mm:ss");
 				Date date = new Date();
 				String nowtime = dateFormat.format(date);
-				insertreviewinfo.setString(1, nowtime);
+				insertreview.setString(1, nowtime);
 				DateFormat dateFormat2 = new SimpleDateFormat("yyyy/MM/dd");
 				String reviewdatestring = dateFormat2
 						.format(areview.reviewDate);
-				insertreviewinfo.setString(2, reviewdatestring);
-				insertreviewinfo.setString(3, String.valueOf(areview.realName));
-				insertreviewinfo.setString(4,
+				insertreview.setString(2, reviewdatestring);
+				insertreview.setString(3, String.valueOf(areview.realName));
+				insertreview.setString(4,
 						String.valueOf(areview.verifiedPurchase));
-				insertreviewinfo.setInt(5, areview.totalVotes);
-				insertreviewinfo.setInt(6, areview.helpfulVotes);
-				insertreviewinfo.setInt(7, (int) areview.fullRating);
-				insertreviewinfo.setInt(8, (int) areview.rating);
-				insertreviewinfo.setString(9, areview.title);
-				insertreviewinfo.setString(10, areview.customerID);
-				insertreviewinfo.setString(11, areview.customerName);
-				insertreviewinfo.setString(12, areview.reviewID);
-				insertreviewinfo.setString(13, areview.itemID);
-				insertreviewinfo.addBatch();
+				insertreview.setInt(5, areview.totalVotes);
+				insertreview.setInt(6, areview.helpfulVotes);
+				insertreview.setInt(7, (int) areview.fullRating);
+				insertreview.setInt(8, (int) areview.rating);
+				insertreview.setString(9, areview.title);
+				insertreview.setString(10, areview.customerID);
+				insertreview.setString(11, areview.customerName);
+				insertreview.setString(12, areview.reviewID);
+				insertreview.setString(13, areview.itemID);
+				insertreview.setString(14, areview.content);
+				insertreview.addBatch();
 			}
 			conn.setAutoCommit(false);
 			insertreview.executeBatch();
-			insertreviewinfo.executeBatch();
 
 			// insert item information from Product Advertisement API's Large
 			// Response
@@ -127,5 +100,25 @@ public class DatabaseUpdater {
 		}
 	}
 
-
+	public static void createDB(String database) {
+		Statement stmt = null;
+		try {
+			Connection conn = DriverManager
+					.getConnection("jdbc:sqlite:" + database);
+			stmt = conn.createStatement();
+			String sql = "CREATE TABLE review ( [KEY] INTEGER PRIMARY KEY, addedDate TEXT, reviewDate TEXT, realName TEXT, verifiedPurchase TEXT, totalVotes NUMERIC, helpfulVotes NUMERIC, fullRating NUMERIC, rating NUMERIC, title TEXT, customerID TEXT, customerName TEXT, reviewID TEXT UNIQUE ON CONFLICT REPLACE, itemID TEXT, content TEXT );";
+			stmt.executeUpdate(sql);
+			sql = "CREATE TABLE iteminfo ( id INTEGER PRIMARY KEY AUTOINCREMENT, itemID TEXT UNIQUE ON CONFLICT IGNORE, itemName TEXT, itemXMLInfo TEXT );";
+			stmt.executeUpdate(sql);
+			sql = "CREATE INDEX idx_review ON review ( reviewID );";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			conn.close();
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": "
+					+ e.getMessage());
+			System.exit(0);
+		}
+		System.out.println("Table created successfully");
+	}
 }

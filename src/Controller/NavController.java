@@ -117,22 +117,25 @@ public class NavController implements Initializable {
          */
         String input = amazonField.getText();     //Test value: "B00NMJJXU4"
         String ASIN = input;
+        String domain = "www.amazon.com";
 
         /**
          * REGEX TESTERS:
          * https://regex101.com/
          * http://www.ocpsoft.org/tutorials/regular-expressions/java-visual-regex-tester/
          * http://regexr.com/
+         * http://txt2re.com/
          *
          * REGEX TEST: http:\/\/(?:www\.|)amazon\.com\/(?:gp\/product|[^\/]+\/dp|dp)\/([^\/]+)
          */
 
-        String regex=".*?amazon\\.com\\/(?:gp\\/product|[^\\/]+\\/dp|dp)\\/([^\\/]+)";
+        String regex = ".*?(www\\.amazon\\.*.+?)/(?:gp/product|[^/]+/dp|dp)/([^/]+)";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            ASIN = matcher.group(1);
+            domain = matcher.group(1);
+            ASIN = matcher.group(2);
         }
 
         /**
@@ -141,7 +144,7 @@ public class NavController implements Initializable {
          * get all ASIN and give them too the navList for the GUI
          */
         if (ASIN.length() == 10) {
-            Main.IM.get(ASIN);
+            Main.IM.get(ASIN, domain, true);
             amazonField.setText("");
             updateListView();
         } else {

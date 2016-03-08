@@ -27,21 +27,10 @@ public class DetailsCell extends ListCell<Item> {
         if (empty) {
             setGraphic(null);
         } else {
-            DC.labelID.setText(item!=null ? " " + item.itemID + " " : "<null>");
             DC.labelName.setText(item!=null ? item.itemName : "<null>");
-//            System.out.println("ID: " + item.itemID);
-            DC.button.setId(item.itemID);
-            if (item.progress <= 0) {
-                if (item.progress < 0) {
-                    DC.progress.setText("ERROR");
-                }
-            } else {
-                DC.progress.setText(item.progress + "/" + item.total);
-                DC.percent.setText(item.progress*100/item.total + "%");
-            }
-            DC.pb.setProgress((double) item.progress/item.total);
+//            DC.buttonClose.setId(item.itemID);
 
-            setGraphic(DC.vbox);
+            setGraphic(DC.bp);
         }
     }
 }

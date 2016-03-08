@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -22,21 +24,19 @@ import java.util.ResourceBundle;
  */
 public class DetailsController implements Initializable{
     @FXML
-    public HBox hbox;
-    @FXML
-    public VBox vbox;
-    @FXML
-    public Label labelID;
+    public BorderPane bp;
     @FXML
     public Label labelName;
     @FXML
-    public Label progress;
+    public Label labelAmount;
     @FXML
-    public Label percent;
+    public Label labelStars1;
     @FXML
-    public ProgressBar pb;
+    public Label labelStars2;
     @FXML
-    public Button button;
+    public Button buttonClose;
+    @FXML
+    public ImageView image;
 
     public DetailsController(EventHandler navEvent, String FXML) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(FXML));
@@ -50,7 +50,7 @@ public class DetailsController implements Initializable{
             throw new RuntimeException(e);
         }
 
-        button.addEventHandler(ActionEvent.ACTION, navEvent);
+        buttonClose.addEventHandler(ActionEvent.ACTION, navEvent);
     }
 
 

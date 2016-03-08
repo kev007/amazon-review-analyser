@@ -8,6 +8,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -36,16 +37,29 @@ public class Item {
     public String itemID;
     public String itemName = "Unknown";
     public ArrayList<Review> reviews;
+    public String domain = "www.amazon.com";
+    public int pages = 1;
     public int total = 1;
     public int progress = 0;
     public int crawlAttempt = 0;
     public boolean crawlSuccess = false;
 
-    public Item(String theitemid) {
+    /**
+     * Constructor for Items that need to be crawled
+     * @param url
+     */
+    public Item(String theitemid, String url, boolean useURL) {
+        domain = url;
         itemID = theitemid;
+        crawlSuccess = false;
         reviews = new ArrayList<Review>();
     }
 
+    /**
+     * Constructor for Items loaded from Database
+     * @param theitemid
+     * @param name
+     */
     public Item(String theitemid, String name) {
         itemID = theitemid;
         itemName = name;
@@ -64,10 +78,10 @@ public class Item {
      * Fetch all reviews for the item from Amazon.com
      */
     public boolean fetchReview() {
-        String url = "http://www.amazon.com/product-reviews/" + itemID
+        String url = "http://" + domain + "/product-reviews/" + itemID
                 + "/?showViewpoints=0&sortBy=byRankDescending&pageNumber=" + 1;
-
-        int maxAttempts = 1;
+//        System.out.println("Crawling " + url);
+        int maxAttempts = 3;
         int timeout = 1000;
 
         while (!crawlSuccess && crawlAttempt < maxAttempts) {
@@ -79,22 +93,29 @@ public class Item {
             try {
                 // Get the max number of review pages;
                 org.jsoup.nodes.Document reviewpage1 = null;
+//                Connection.Response r1 = Jsoup.connect(url)
+//                        .timeout(timeout)
+//                        .followRedirects(true)
+//                        .userAgent("Mozilla/17.0")
+//                        .execute();
+//                reviewpage1 = r1.parse();
+//                System.out.println(reviewpage1);
+
                 reviewpage1 = Jsoup.connect(url)
                         .timeout(timeout)
                         .followRedirects(true)
+//                        .userAgent("Mozilla/17.0")
                         .get();
                 int maxpage = 1;
                 Elements pagelinks = reviewpage1.select("a[href*=pageNumber=]");
-
                 if (reviewpage1.select("a[href*=pageNumber=]").isEmpty()) {
-
-                    File errorHTML = new File("error.html");
-                    FileUtils.writeStringToFile(errorHTML, reviewpage1.toString());
-                    Desktop.getDesktop().open(errorHTML);
+//                    File errorHTML = new File("ERROR" + itemID + progress + ".html");
+//                    FileUtils.writeStringToFile(errorHTML, reviewpage1.toString());
+//                    Desktop.getDesktop().open(errorHTML);
+//                    Desktop.getDesktop().browse(r1.url().toURI());
 
                     throw new Exception("THIS SHIT'S EMPTY, YO!");
                 }
-
                 if (pagelinks.size() != 0) {
                     ArrayList<Integer> pagenum = new ArrayList<Integer>();
                     for (Element link : pagelinks) {
@@ -108,25 +129,33 @@ public class Item {
                 //get product name
                 itemName = reviewpage1.select("div.a-row.product-title").select("a.a-size-large.a-link-normal").text();
                 //            System.out.println("Name: " + itemName);
-                total = maxpage;
+                pages = maxpage;
 
                 // collect review from each of the review pages;
                 for (int p = progress; p <= maxpage; p++) {
-                    url = "http://www.amazon.com/product-reviews/"
+                    url = "http://" + domain + "/product-reviews/"
                             + itemID
                             + "/?sortBy=helpful&pageNumber="
                             + p;
                     org.jsoup.nodes.Document reviewpage = null;
+//                    Connection.Response r = Jsoup.connect(url)
+//                            .timeout(timeout)
+//                            .followRedirects(true)
+//                            .userAgent("Mozilla/17.0")
+//                            .execute();
+//                    reviewpage = r.parse();
                     reviewpage = Jsoup.connect(url)
                             .timeout(timeout)
                             .followRedirects(true)
+//                            .userAgent("Mozilla/17.0")
                             .get();
                     if (reviewpage.select("div.a-section.review").isEmpty()) {
-                        System.out.println(itemID + " " + "no review " + p);
+                        System.out.println(itemID + " no review " + p);
 
-                        File errorHTML = new File("error.html");
-                        FileUtils.writeStringToFile(errorHTML, reviewpage.toString());
-                        Desktop.getDesktop().open(errorHTML);
+//                        File errorHTML = new File("ERROR" + itemID + progress + ".html");
+//                        FileUtils.writeStringToFile(errorHTML, reviewpage1.toString());
+//                        Desktop.getDesktop().open(errorHTML);
+//                        Desktop.getDesktop().browse(r.url().toURI());
 
                         throw new Exception("THIS SHIT'S EMPTY, YO!");
                     } else {
@@ -139,11 +168,14 @@ public class Item {
                     }
 
                     progress = p;
+                    total = reviews.size();
                     Main.MC.refresh();
+//                    System.out.println("Comments: " + reviews.size());
                 }
                 crawlSuccess = true;
             } catch (Exception e) {
                 System.out.println(itemID + " " + "Exception " + e.getClass() + " \t " + e.getMessage());
+
 //                e.printStackTrace();
 //                try {
 //                    System.out.println("Waiting for " + crawlAttempt + "min before trying again");
@@ -231,8 +263,15 @@ public class Item {
         Elements date = reviewBlock.select("span.review-date");
         String datetext = date.first().text();
         datetext = datetext.substring(3); // remove "On "
-        Date reviewDate = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH)
-                .parse(datetext);
+        Date reviewDate = new Date();
+        String[] formatStrings = {"d MMMM yyyy", "MMMM d, yyyy"};
+        for (String formatString : formatStrings) {
+            try {
+                reviewDate = new SimpleDateFormat(formatString, Locale.ENGLISH).parse(datetext);
+//                System.out.println(reviewDate);
+            }
+            catch (ParseException e) {}
+        }
 
         // review content
         Element contentDoc = reviewBlock.select("span.review-text").first();
@@ -273,7 +312,6 @@ public class Item {
         Date date = new Date();
         String timenow = dateFormat.format(date);
         System.out.println(this.itemID + " Finished " + timenow);
-        //TODO: event - database writing finished
     }
 
     /**

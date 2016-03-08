@@ -37,32 +37,23 @@ public class ItemManager {
 
     public void readDatabase() {
         String ASIN = "";
-        String Name = "";
+        Item item;
 //        System.out.println(Main.DBM.getDBTables());
 
-        HashMap<String, String> dbItems = Main.DBM.getItems();
-//        HashMap<String, String> dbItems = new HashMap<String, String>();
+        HashMap<String, Item> dbItems = Main.DBM.getItems();
 
         Set set = dbItems.entrySet();
         for (Object aSet : set) {
             Map.Entry entry = (Map.Entry) aSet;
             ASIN = entry.getKey().toString();
-            Name = entry.getValue().toString();
+            item = (Item) entry.getValue();
 
-            add(ASIN, Name);
-        }
-    }
-
-    /**
-     * adds empty Item to localItems
-     * @param ASIN
-     */
-    public void add(String ASIN, String Name) {
-        if (localItems.containsKey(ASIN)) {
-            System.out.println(ASIN + " found locally in localItems: " + localItems.get(ASIN).itemID);
-        } else {
-            System.out.println("adding " + ASIN);
-            localItems.put(ASIN, new Item(ASIN, Name));
+            if (localItems.containsKey(ASIN)) {
+                System.out.println(ASIN + " found locally in localItems: " + localItems.get(ASIN).itemID);
+            } else {
+                System.out.println("adding " + ASIN);
+                localItems.put(ASIN, item);
+            }
         }
     }
 
@@ -70,12 +61,12 @@ public class ItemManager {
      * return localItems for corresponding ASIN, crawl and return if not locally available
      * @param ASIN
      */
-    public void get(String ASIN) {
+    public void get(String ASIN, String url, boolean useURL) {
         if (localItems.containsKey(ASIN)) {
             System.out.println(ASIN + " found locally in localItems: " + localItems.get(ASIN).itemID);
         } else {
             thread++;
-            localItems.put(ASIN, crawl(thread, ASIN));
+            localItems.put(ASIN, crawl(thread, ASIN, url, useURL));
         }
     }
 
@@ -132,8 +123,8 @@ public class ItemManager {
     /**
      * start new Model thread for given ASIN
      */
-    public Item crawl(int thread, String ASIN) {
-        Item item = new Item(ASIN);
+    public Item crawl(int thread, String ASIN, String url, boolean useURL) {
+        Item item = new Item(ASIN, url, useURL);
         Crawler C = new Crawler(thread, item);
 
         Thread t = new Thread (C);

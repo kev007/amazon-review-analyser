@@ -1,7 +1,9 @@
 package Controller;
 
+import Model.DatabaseUpdater;
 import Model.Item;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,10 +77,15 @@ public class DBManager extends Thread {
      *
      * @return
      */
-    public HashMap<String, String> getItems(){
-        HashMap<String, String> temp = new HashMap<String, String>();
+    public HashMap<String, Item> getItems(){
+        HashMap<String, Item> dbItems = new HashMap<String, Item>();
         try {
             Class.forName("org.sqlite.JDBC");
+
+            // if database not exist
+            if (!(new File(this.dbName).isFile())) {
+                DatabaseUpdater.createDB(this.dbName);
+            }
 
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbName);
             DatabaseMetaData dbmd = conn.getMetaData();
@@ -87,7 +94,11 @@ public class DBManager extends Thread {
             ResultSet rs = s.executeQuery("SELECT itemID, itemName FROM iteminfo;");
 
             while (rs.next()){
-                temp.put(rs.getString(1), rs.getString(2));
+                Item item;
+                item = new Item(rs.getString(1), rs.getString(2));
+                item.total = 999;
+
+                dbItems.put(rs.getString(1), item);
             }
 
             conn.close();
@@ -95,7 +106,7 @@ public class DBManager extends Thread {
         catch (Exception e) {
             e.printStackTrace();
         }
-        return temp;
+        return dbItems;
     }
 
     /**
@@ -129,8 +140,12 @@ public class DBManager extends Thread {
      */
     private void writeDB(){
         try {
-            writeQueue.removeFirst().writeReviewsToDatabase(this.dbName, false);
-
+            Item item = writeQueue.removeFirst();
+            if (item.crawlSuccess) {
+                item.writeReviewsToDatabase(this.dbName, false);
+            } else {
+                System.out.println("FAILED writing to Database: incomplete crawl");
+            }
         }
         catch (Exception e){
             e.printStackTrace();
@@ -143,7 +158,6 @@ public class DBManager extends Thread {
      */
     @Override
     public void run() {
-
         while (true) {
             try {
                 if (writeQueue.size() == 0){
@@ -159,6 +173,4 @@ public class DBManager extends Thread {
             }
         }
     }
-
-    
 }

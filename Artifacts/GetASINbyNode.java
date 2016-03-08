@@ -1,4 +1,4 @@
-package Model;
+package Model.unused;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -17,7 +17,7 @@ import org.joda.time.DateTime;
  * Get all items' ASIN(Product IDs) in a node(product category) from amazon.com
  */
 @SuppressWarnings("unused")
-public class GetASINbyNode implements GetID{
+public class GetASINbyNode implements GetID {
 	/**
 	 * Example (Tablet PCs):
 	 * 	getIDsByNode getid = new getIDsByNode("541966%2C1232597011",1,300);

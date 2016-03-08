@@ -1,4 +1,4 @@
-package Model;
+package Model.unused;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import Model.Item;
 import org.apache.commons.io.FileUtils;
 
 /**
