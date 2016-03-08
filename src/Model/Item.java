@@ -39,8 +39,8 @@ public class Item {
     public ArrayList<Review> reviews;
     public String domain = "www.amazon.com";
     public int pages = 1;
-    public int total = 1;
-    public int progress = 0;
+    public int total = 0;
+    public int progress = 1;
     public int crawlAttempt = 0;
     public boolean crawlSuccess = false;
 
@@ -64,13 +64,12 @@ public class Item {
         itemID = theitemid;
         itemName = name;
         crawlSuccess = true;
-        total = 1;
-        progress = 1;
         crawlAttempt = 0;
         reviews = new ArrayList<Review>();
     }
 
     public void addReview(Review thereview) {
+        total++;
         reviews.add(thereview);
     }
 
@@ -168,7 +167,7 @@ public class Item {
                     }
 
                     progress = p;
-                    total = reviews.size();
+//                    total = reviews.size();
                     Main.MC.refresh();
 //                    System.out.println("Comments: " + reviews.size());
                 }

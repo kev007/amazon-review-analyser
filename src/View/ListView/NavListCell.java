@@ -39,10 +39,10 @@ public class NavListCell extends ListCell<Item> {
                 CC.progress.setText(Integer.toString(item.total));
                 CC.percent.setText(item.progress*100/item.pages + "%");
             } else{
-                CC.progress.setText(item.progress + "/" + item.total);
-                CC.percent.setText(item.progress*100/item.total + "%");
+                CC.progress.setText(item.progress + "/" + item.pages);
+                CC.percent.setText(item.progress*100/item.pages + "%");
             }
-            CC.pb.setProgress((double) item.progress/item.total);
+            CC.pb.setProgress((double) item.progress/item.pages);
 
             setGraphic(CC.hbox);
         }
