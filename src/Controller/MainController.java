@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Item;
 import View.ListView.DetailsCell;
-import View.ListView.NavListCell;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,40 +14,56 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    /** Static Controller **/
     public static NavController NC;
+    public static DetailsController DC;
+
+    /** Event Handler**/
     public EventHandler navEvent;
 
-    @FXML
-    private MenuItem menuPrintLocal;
+    /** FXML Elements**/
+    @FXML private MenuItem menuPrintLocal;
+    @FXML private MenuItem menuAddItems;
+    @FXML public ListView<Item> detailsList;
 
-    @FXML
-    private MenuItem menuAddItems;
-
-    @FXML
-    public ListView<Item> detailsList;
-
+    /**
+     * Construktor
+     *
+     * is running before the gui starts
+     */
     public MainController() {
         System.out.printf("Starting MainController\n");
-        //this constructor is run before the GUI
-        //put stuff in initialize() instead
         Main.MC = this;
     }
 
+    /**
+     * refresh NavigationController
+     * and DetailsController
+     */
     public void refresh() {
+
+        // refresh Navigation
         NC.refresh();
+        detailsList.refresh();
+        detailsList.setItems(NC.getDetailsData());
+
+        // refresh Detail
+        // TODO DC refresh
+        //DC.refresh();
     }
 
     /**
      * print all crawled stuff for debuggging purposes
      * @param event
      */
-    @FXML
-    public void debugPrintLocal(ActionEvent event) {
+    @FXML public void debugPrintLocal(ActionEvent event) {
         Main.IM.printLocal();
     }
 
-    @FXML
-    public void debugAddItems(ActionEvent event) {
+    /**
+     * debug Method, add some Items to NavigationList
+     */
+    @FXML public void debugAddItems() {
         Main.IM.get("B00A378L4C", "", false);
         Main.IM.get("B0143UM4TC", "", false);
         Main.IM.get("B01606IDL0", "", false);
@@ -57,16 +72,22 @@ public class MainController implements Initializable {
         NC.updateListView();
     }
 
-    @FXML
-    public void readDB(ActionEvent event) {
-        Main.IM.readDatabase();
-//        Main.IM.add("0000000123", "TEST ITEM 123");
+    /**
+     * read Database and update ListView
+     */
+    @FXML public void readDB() {
 
+        // TODO ugly method...
+        Main.IM.readDatabase();
         NC.updateListView();
     }
 
-    @FXML
-    public void initialize(URL location, ResourceBundle resources) {
+    /**
+     *  Controller Method
+     *
+     *  put some stuff here
+     */
+    @FXML public void initialize(URL location, ResourceBundle resources) {
         navEvent = event -> {
             Parent p = (Parent) event.getSource();
 

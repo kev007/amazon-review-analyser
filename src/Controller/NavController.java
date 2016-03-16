@@ -25,25 +25,34 @@ import java.util.regex.Pattern;
  * http://stackoverflow.com/questions/19588029/customize-listview-in-javafx-with-fxml
  */
 public class NavController implements Initializable {
-    public EventHandler navEvent;
-    public ObservableList<Item> detailsData;
 
-    @FXML
-    private TextField amazonField;
-    @FXML
-    private Button getButton;
-    @FXML
-    public ListView<Item> navList;
+    /** internal List **/
+    private ObservableList<Item> detailsData;
 
+    /** Event Handler**/
+    private EventHandler navEvent;
+
+    /** FXML Elements**/
+    @FXML private TextField amazonField;
+    @FXML private Button getButton;
+    @FXML private ListView<Item> navList;
+
+    /**
+     * Construktor
+     *
+     * is running before the gui starts
+     */
     public NavController() {
         System.out.printf("Starting NavController\n");
-        //this constructor is run before the GUI
-        //put stuff in initialize() instead
         Main.MC.NC = this;
     }
 
-    @FXML
-    public void initialize(URL location, ResourceBundle resources) {
+    /**
+     *  Controller Method
+     *
+     *  put some stuff here
+     */
+    @FXML public void initialize(URL location, ResourceBundle resources) {
         assert amazonField != null : "fx:id=\"asin\" was not injected: check your FXML file 'MainView.fxml'.";
         assert getButton != null : "fx:id=\"getButton\" was not injected: check your FXML file 'MainView.fxml'.";
 
@@ -99,22 +108,34 @@ public class NavController implements Initializable {
 //        navList.refresh();
     }
 
+    /**
+     * refresh the internal listView
+     */
     public void refresh() {
         navList.refresh();
-        Main.MC.detailsList.refresh();
-        Main.MC.detailsList.setItems(detailsData);
     }
 
-    @FXML
-    public void selectAll() {
+    /**
+     * get the current internal detailsData
+     * @return detailsData
+     */
+    public ObservableList<Item> getDetailsData(){
+        return detailsData;
+    }
+
+    /**
+    @FXML public void selectAll() {
+        //TODO ugly change or delete
         amazonField.selectAll();
     }
+    */
 
-    @FXML
-    public void getItem() {
-        /**
-         * Read user input from GUI
-         */
+    /**
+     * internal Method
+     * getItem from GUI and execute crawling command
+     **/
+    @FXML public void getItem() {
+        // Read user input from GUI
         String input = amazonField.getText();     //Test value: "B00NMJJXU4"
         String ASIN = input;
         String domain = "www.amazon.com";

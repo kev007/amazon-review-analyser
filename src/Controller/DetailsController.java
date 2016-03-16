@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 
 public class DetailsController implements Initializable {
 
+    /** FXML Elements**/
     @FXML ListView<Item> listView;
 
     /**
@@ -20,8 +21,7 @@ public class DetailsController implements Initializable {
      */
     public DetailsController() {
         System.out.println("Starting DetailsController");
-        //this constructor is run before the GUI
-        //put stuff in initialize() instead
+        Main.MC.DC = this;
     }
 
     /**
@@ -32,5 +32,12 @@ public class DetailsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    /**
+     * refresh the internal listView
+     */
+    public void refresh(){
+        listView.refresh();
     }
 }

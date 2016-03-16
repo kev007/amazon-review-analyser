@@ -15,11 +15,8 @@ import java.util.Map;
  */
 public class DBManager extends Thread {
 
-    public LinkedList<Item> writeQueue;
-
-    /**
-     * Database Name
-     */
+    /** Manager Attributes **/
+    private LinkedList<Item> writeQueue;
     private String dbName;
 
     /**
