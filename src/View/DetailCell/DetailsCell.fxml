@@ -5,8 +5,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<BorderPane fx:id="bp" prefHeight="400.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="detailCell" prefHeight="400.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.NavController">
 
     <!-- FX Head -->
     <top>
@@ -39,13 +39,13 @@
                     <center>
                         <VBox>
                             <children>
-                                <!-- Item Ranking 1 -->
+                                <!-- Item Ranking 1 from Amazon -->
                                 <TextField fx:id="rating1" alignment="CENTER" text="5 Stars">
                                     <VBox.margin>
                                         <Insets left="5.0" right="5.0" top="5.0"/>
                                     </VBox.margin>
                                 </TextField>
-                                <!-- Item Ranking 2 -->
+                                <!-- Item Ranking 2 from Analyse-->
                                 <TextField fx:id="rating2" alignment="CENTER" text="5 Stars">
                                     <VBox.margin>
                                         <Insets left="5.0" right="5.0" top="25.0"/>
@@ -71,7 +71,8 @@
         <ScrollPane prefHeight="120.0">
             <content>
                 <VBox>
-
+                    <!-- Add some cellElements like helpful/ Analysis / ...-->
+                    <fx:include fx:id="cellElementHelpful" source="DetailCellElement.fxml" />
                 </VBox>
             </content>
         </ScrollPane>
