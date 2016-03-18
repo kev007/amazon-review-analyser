@@ -47,5 +47,6 @@
                 </StackPane>
             </items>
         </SplitPane>
+      <TextArea fx:id="messageConsole" editable="false" prefHeight="100.0" promptText="[TEMPORARY] TextArea for debugging output" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
     </children>
 </AnchorPane>

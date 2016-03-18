@@ -48,6 +48,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Amazon Review Analyser");
         primaryStage.setResizable(true);
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
@@ -68,7 +69,7 @@ public class Main extends Application {
      * Item-Manager
      */
     public static void startup() {
-        DBM = new DBManager("items.db");
+        DBM = new DBManager("test3.db");
         DBM.start();
         IM = new ItemManager();
     }

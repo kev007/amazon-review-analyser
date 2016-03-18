@@ -85,15 +85,15 @@ public class DBManager extends Thread {
             }
 
             Connection conn = DriverManager.getConnection("jdbc:sqlite:" + this.dbName);
-            DatabaseMetaData dbmd = conn.getMetaData();
+//            DatabaseMetaData dbmd = conn.getMetaData();
 
             Statement s = conn.createStatement();
-            ResultSet rs = s.executeQuery("SELECT itemID, itemName FROM iteminfo;");
+            ResultSet rs = s.executeQuery("SELECT itemID, itemName, numReviews FROM iteminfo;");
 
             while (rs.next()){
                 Item item;
                 item = new Item(rs.getString(1), rs.getString(2));
-                item.total = 999;
+                item.total = rs.getInt(3);
 
                 dbItems.put(rs.getString(1), item);
             }

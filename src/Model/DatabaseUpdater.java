@@ -87,10 +87,11 @@ public class DatabaseUpdater {
 			// Response
 			// in raw XML format
 			PreparedStatement insertitemXML = conn
-					.prepareStatement("insert into iteminfo(itemID, itemName, itemXMLInfo) values (?1, ?2 ,?3);");
+					.prepareStatement("insert into iteminfo(itemID, itemName, itemXMLInfo, numReviews) values (?1, ?2 ,?3, ?4);");
 			insertitemXML.setString(1, itemID);
 			insertitemXML.setString(2, itemName);
 			insertitemXML.setString(3, itemInfo);
+			insertitemXML.setInt(4, reviews.size());
 			insertitemXML.addBatch();
 			insertitemXML.executeBatch();
 			conn.commit();
@@ -108,7 +109,7 @@ public class DatabaseUpdater {
 			stmt = conn.createStatement();
 			String sql = "CREATE TABLE review ( [KEY] INTEGER PRIMARY KEY, addedDate TEXT, reviewDate TEXT, realName TEXT, verifiedPurchase TEXT, totalVotes NUMERIC, helpfulVotes NUMERIC, fullRating NUMERIC, rating NUMERIC, title TEXT, customerID TEXT, customerName TEXT, reviewID TEXT UNIQUE ON CONFLICT REPLACE, itemID TEXT, content TEXT );";
 			stmt.executeUpdate(sql);
-			sql = "CREATE TABLE iteminfo ( id INTEGER PRIMARY KEY AUTOINCREMENT, itemID TEXT UNIQUE ON CONFLICT IGNORE, itemName TEXT, itemXMLInfo TEXT );";
+			sql = "CREATE TABLE iteminfo ( id INTEGER PRIMARY KEY AUTOINCREMENT, itemID TEXT UNIQUE ON CONFLICT IGNORE, itemName TEXT, itemXMLInfo TEXT, numReviews NUMERIC);";
 			stmt.executeUpdate(sql);
 			sql = "CREATE INDEX idx_review ON review ( reviewID );";
 			stmt.executeUpdate(sql);

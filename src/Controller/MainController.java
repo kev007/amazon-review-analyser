@@ -9,7 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,6 +29,7 @@ public class MainController implements Initializable {
     @FXML private MenuItem menuPrintLocal;
     @FXML private MenuItem menuAddItems;
     @FXML public ListView<Item> detailsList;
+    @FXML public TextArea messageConsole;
 
     /**
      * Construktor
@@ -97,5 +102,24 @@ public class MainController implements Initializable {
         };
 
         detailsList.setCellFactory(navList1 -> new DetailsCell(navEvent, "DetailsCell.fxml"));
+
+//        Console console = new Console(messageConsole);
+//        PrintStream ps = new PrintStream(console, true);
+//        System.setOut(ps);
+//        System.setErr(ps);
+    }
+
+    public static class Console extends OutputStream {
+
+        private TextArea output;
+
+        public Console(TextArea ta) {
+            this.output = ta;
+        }
+
+        @Override
+        public void write(int i) throws IOException {
+            output.appendText(String.valueOf((char) i));
+        }
     }
 }

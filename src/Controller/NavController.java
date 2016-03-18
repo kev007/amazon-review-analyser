@@ -127,7 +127,6 @@ public class NavController implements Initializable {
      * highlight all the text in the entry field
      */
     @FXML public void selectAll() {
-        //TODO ugly change or delete
         amazonField.selectAll();
     }
 
