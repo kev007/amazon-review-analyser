@@ -34,7 +34,7 @@
             </Button>
          </right>
          <center>
-            <TextField fx:id="amazonField" minWidth="250.0" onKeyPressed="#getItem" onMouseClicked="#selectAll" prefHeight="39.0" prefWidth="275.0" promptText="Input Amazon URL or ASIN and press 'Enter' or &quot;Get Item&quot;" text="http://www.amazon.com/dp/B00NMJJXU4" BorderPane.alignment="CENTER">
+            <TextField fx:id="amazonField" minWidth="250.0" onKeyPressed="#getItem" onMouseEntered="#selectAll" prefHeight="39.0" prefWidth="275.0" promptText="Input Amazon URL or ASIN and press 'Enter' or &quot;Get Item&quot;" text="http://www.amazon.com/dp/B00NMJJXU4" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets left="5.0" />
                </BorderPane.margin></TextField>
