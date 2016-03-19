@@ -56,8 +56,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         startup(args);      //start logic
 
-//        new Debug().debug();
-//        new Debug().debug2();
+//        Debug.fastRun();
+//        Debug.debug();
+//        Debug.debug2();
     }
 
     /**
@@ -68,6 +69,14 @@ public class Main extends Application {
         DBM = new DBManager("test3.db");
         DBM.start();
         IM = new ItemManager();
+
+        System.out.println("Reading from Database");
+        IM.readDatabase();
+
+        for (String s: args) {
+            System.out.println(s);
+//            Main.IM.get(s, "", false);
+        }
 
         launch(args);   //start interface
     }

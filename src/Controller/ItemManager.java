@@ -29,9 +29,6 @@ public class ItemManager {
         System.out.println("Starting ItemManager");
         localItems = new HashMap<String, Item>();
 
-        System.out.println("Reading from Database");
-        readDatabase();
-
         thread = 0;
     }
 
@@ -189,8 +186,9 @@ public class ItemManager {
 
             Main.DBM.addItem(item);
 
-//            Main.NC.updateListView();
-            Main.MC.refresh();
+            if (Main.MC != null) {
+                Main.MC.refresh();
+            }
         }
     }
 }

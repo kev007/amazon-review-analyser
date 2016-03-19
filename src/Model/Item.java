@@ -97,13 +97,13 @@ public class Item {
         String url = "http://" + domain + "/product-reviews/" + itemID
                 + "/?showViewpoints=0&sortBy=byRankDescending&pageNumber=" + 1;
 //        System.out.println("Crawling " + url);
-        int maxAttempts = 3;
+        int maxAttempts = 10;
         int timeout = 1000;
 
         while (!crawlSuccess && crawlAttempt < maxAttempts) {
             crawlAttempt++;
 
-            System.out.println(itemID + " (" + progress + "/" + total + ") \t " + (char) 27 + "[36m" +
+            System.out.println(itemID + " (" + progress + "/" + pages + ") \t " + (char) 27 + "[36m" +
                     " GET " + crawlAttempt + " OF " + maxAttempts + (char) 27 + "[0m" + " \t Trying.");
 
             try {
@@ -168,7 +168,11 @@ public class Item {
 
                     progress = p;
 //                    total = reviews.size();
-                    Main.MC.refresh();
+                    if (Main.MC != null) {
+                        Main.MC.refresh();
+                    } else {
+                        System.out.println(itemID + " (" + progress + "/" + pages + ") \t " + "Crawling (Headless)");
+                    }
 //                    System.out.println("Comments: " + reviews.size());
                 }
                 crawlSuccess = true;

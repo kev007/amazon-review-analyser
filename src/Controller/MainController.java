@@ -46,7 +46,6 @@ public class MainController implements Initializable {
      * and DetailsController
      */
     public void refresh() {
-
         // refresh Navigation
         NC.refresh();
         detailsList.refresh();
