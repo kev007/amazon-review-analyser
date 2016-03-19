@@ -73,6 +73,23 @@ public class Item {
         reviews.add(thereview);
     }
 
+    public Connection.Response getHTTPresponse (String url) throws IOException {
+        Connection.Response r1 = null;
+        r1 = Jsoup.connect(url)
+                .timeout(1000)
+                .followRedirects(true)
+                .userAgent("Mozilla/17.0")
+                .execute();
+
+
+//        File errorHTML = new File("ERROR" + itemID + progress + ".html");
+//        FileUtils.writeStringToFile(errorHTML, r1.toString());
+//        Desktop.getDesktop().open(errorHTML);
+//        Desktop.getDesktop().browse(r1.url().toURI());
+
+        return r1;
+    }
+
     /**
      * Fetch all reviews for the item from Amazon.com
      */
@@ -92,13 +109,7 @@ public class Item {
             try {
                 // Get the max number of review pages;
                 org.jsoup.nodes.Document reviewpage1 = null;
-//                Connection.Response r1 = Jsoup.connect(url)
-//                        .timeout(timeout)
-//                        .followRedirects(true)
-//                        .userAgent("Mozilla/17.0")
-//                        .execute();
-//                reviewpage1 = r1.parse();
-//                System.out.println(reviewpage1);
+//                reviewpage1 = getHTTPresponse(url).parse();
 
                 reviewpage1 = Jsoup.connect(url)
                         .timeout(timeout)
@@ -108,10 +119,7 @@ public class Item {
                 int maxpage = 1;
                 Elements pagelinks = reviewpage1.select("a[href*=pageNumber=]");
                 if (reviewpage1.select("a[href*=pageNumber=]").isEmpty()) {
-//                    File errorHTML = new File("ERROR" + itemID + progress + ".html");
-//                    FileUtils.writeStringToFile(errorHTML, reviewpage1.toString());
-//                    Desktop.getDesktop().open(errorHTML);
-//                    Desktop.getDesktop().browse(r1.url().toURI());
+
 
                     throw new Exception("THIS SHIT'S EMPTY, YO!");
                 }
@@ -137,12 +145,7 @@ public class Item {
                             + "/?sortBy=helpful&pageNumber="
                             + p;
                     org.jsoup.nodes.Document reviewpage = null;
-//                    Connection.Response r = Jsoup.connect(url)
-//                            .timeout(timeout)
-//                            .followRedirects(true)
-//                            .userAgent("Mozilla/17.0")
-//                            .execute();
-//                    reviewpage = r.parse();
+//                    reviewpage1 = getHTTPresponse(url).parse();
                     reviewpage = Jsoup.connect(url)
                             .timeout(timeout)
                             .followRedirects(true)
@@ -151,10 +154,7 @@ public class Item {
                     if (reviewpage.select("div.a-section.review").isEmpty()) {
                         System.out.println(itemID + " no review " + p);
 
-//                        File errorHTML = new File("ERROR" + itemID + progress + ".html");
-//                        FileUtils.writeStringToFile(errorHTML, reviewpage1.toString());
-//                        Desktop.getDesktop().open(errorHTML);
-//                        Desktop.getDesktop().browse(r.url().toURI());
+
 
                         throw new Exception("THIS SHIT'S EMPTY, YO!");
                     } else {
